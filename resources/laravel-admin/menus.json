@@ -1,0 +1,14 @@
+{
+  "menus": [
+    {
+      "section": "Modules",
+      "items": [
+        {
+          "title": "Faqs",
+          "icon": "<i class='fas fa-question mr-1'><\/i>",
+          "url": "\/admin\/faq"
+        }
+      ]
+    }
+  ]
+}
