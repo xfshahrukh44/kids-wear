@@ -113,7 +113,7 @@
                                 </div>
                                 <p class="para-1">Subtotal: <span>${{$product->price}}</span></p>
                                 <div class="product-detail-section-2-text-anker">
-                                    <a href="javascript:;" class="btn custome-btn-1">Add to wishlist</a>
+{{--                                    <a href="javascript:;" class="btn custome-btn-1">Add to wishlist</a>--}}
                                     <button type="submit" href="javascript:;" class="btn custome-btn">Add to cart</button>
                                 </div>
                             </form>
