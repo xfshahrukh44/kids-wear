@@ -237,7 +237,7 @@
     {{--                                </div>--}}
                                     <h6 class="heading-6 black-color">{{$blog->name}}</h6>
                                     <p class="para-1">
-                                        {{$blog->short_detail}}
+                                        {!! $blog->short_detail !!}
                                     </p>
                                 </div>
                             </div>
