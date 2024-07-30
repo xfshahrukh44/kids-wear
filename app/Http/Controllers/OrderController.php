@@ -306,7 +306,6 @@ class OrderController extends Controller
 
 	public function placeOrder(Request $request)
 	{
-
 		$validateArr = array();
 		$messageArr = array();
 		$validateArr['country'] = 'required|max:50';
@@ -475,8 +474,10 @@ class OrderController extends Controller
 			//echo "data saved";
 			//return;
 			if (Auth::check()) {
+			    return redirect()->route('home')->with('success', 'Your Order has been placed Successfully');
 				return redirect('/');
 			} else {
+			    return redirect()->route('home')->with('success', 'Your Order has been placed Successfully');
 				return redirect('/');
 			}
 		}

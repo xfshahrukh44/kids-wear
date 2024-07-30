@@ -90,8 +90,10 @@
                                                         </div>
                                                     </fieldset>
     
-                                                    <div class="single-input-item">
-                                                        <button class="check-btn sqr-btn btn btn-red" id="updateProfile">Save Changes</button>
+                                                    <div class="single-input-item mb-4">
+                                                        <button class="check-btn sqr-btn btn btn-red" id="updateProfile" style="    background-color: #b1e76f; color: white;">
+                                                            Save Changes
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -150,7 +150,10 @@ class LoggedInController extends Controller
 
 	}
 
-    public function updateAccount(Request $request) { 
+    public function updateAccount(Request $request) {
+        $request->validate([
+            'email' => 'email|unique:users,email,' . auth()->id()
+        ]);
 
 		$user = DB::table('users')->where('id', Auth::user()->id)->first();
 		
