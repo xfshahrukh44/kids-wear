@@ -56,7 +56,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $page = DB::table('pages')->where('id', 1)->first();
+       $page = Page::where('id', 1)->first();
 
        return view('welcome', compact('page'));
     }
