@@ -21,7 +21,7 @@ use App\Page;
 use Image;
 
 class HomeController extends Controller
-{   
+{
     use HelperTrait;
     /**
      * Create a new controller instance.
@@ -29,7 +29,7 @@ class HomeController extends Controller
      * @return void
      */
      // use Helper;
-     
+
     public function __construct()
     {
         //$this->middleware('auth');
@@ -38,16 +38,16 @@ class HomeController extends Controller
                      select('img_path')
                      ->where('table_name','=','logo')
                      ->first();
-             
+
         $favicon = imagetable::
                      select('img_path')
                      ->where('table_name','=','favicon')
-                     ->first(); 
-        
+                     ->first();
+
         View()->share('logo',$logo);
         View()->share('favicon',$favicon);
 
-    } 
+    }
 
     /**
      * Show the application dashboard.
@@ -55,9 +55,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
-       $page = DB::table('pages')->where('id', 1)->first();
- 
+    {
+       $page = Page::where('page_name', 'Home')->first();
+
        return view('welcome', compact('page'));
     }
 
@@ -141,16 +141,16 @@ class HomeController extends Controller
     public function newsletterSubmit(Request $request){
 
         $is_email = newsletter::where('newsletter_email',$request->newsletter_email)->count();
-        if($is_email == 0) {        
+        if($is_email == 0) {
             $inquiry = new newsletter;
             $inquiry->newsletter_email = $request->newsletter_email;
             $inquiry->save();
             return response()->json(['message'=>'Thank you for contacting us. We will get back to you asap', 'status' => true]);
-            
+
         }else{
             return response()->json(['message'=>'Email already exists', 'status' => false]);
         }
-            
+
     }
 
     public function updateContent(Request $request){

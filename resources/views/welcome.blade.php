@@ -9,18 +9,17 @@
                 <div class="col-lg-6">
                     <div class="section-1-text" data-aos="fade-right" data-aos-duration="500">
                         <h1 class="heading-1"><span class="green-text d-block">Summer</span><span
-                                    class="purple-text d-block">Fashion</span></h1>
-                        <p class="para-1 white-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                            do <span class="d-block"></span> eiusmod tempor incididunt ut labore dolore</p>
+                                class="purple-text d-block">Fashion</span></h1>
+                        <p class="para-1 white-color">{!! $page->sections[7]->value !!}</p>
                         <div class="section-1-text-anker">
-                            <a href="{{route('front.shop')}}" class="btn custome-btn green-btn mr-1">Shop Now</a>
-                            <a href="{{route('contact')}}" class="btn custome-btn purple-btn">Contact us</a>
+                            <a href="{{ route('front.shop') }}" class="btn custome-btn green-btn mr-1">Shop Now</a>
+                            <a href="{{ route('contact') }}" class="btn custome-btn purple-btn">Contact us</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="section-1-img" data-aos="fade-left" data-aos-duration="500">
-                        <img src="{{asset('images/section-1-img-1.png')}}" class="img-fluid" alt="">
+                        <img src="{!! $page->sections[14]->value !!}" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -42,14 +41,16 @@
                                 'Other' => asset('images/section-2-slider-img-4.png'),
                             ];
                         @endphp
-                        @foreach(\App\Category::all() as $category)
+                        @foreach (\App\Category::all() as $category)
                             <div class="item" data-aos="fade-right" data-aos-duration="500">
-                                <a href="{{route('front.shop', ['category_id' => $category->id])}}">
+                                <a href="{{ route('front.shop', ['category_id' => $category->id]) }}">
                                     <div class="section-2-slider-main">
                                         <div class="section-2-slider-img">
-                                            <img src="{{$category_images_map[$category->name] ?? asset('images/section-2-slider-img-4.png')}}" alt="" class="img-fluid">
+                                            <img src="{{ $category_images_map[$category->name] ?? asset('images/section-2-slider-img-4.png') }}"
+                                                alt="" class="img-fluid">
                                             <div class="section-2-slider-main-anker">
-                                                <a href="#" class="btn custome-btn white-btn mr-1">{{$category->name}}</a>
+                                                <a href="#"
+                                                    class="btn custome-btn white-btn mr-1">{{ $category->name }}</a>
                                             </div>
                                         </div>
 
@@ -70,8 +71,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-3-text text-center" data-aos="fade-down" data-aos-duration="500">
-                        <h2 class="heading-2 white-color"><span class="d-block">We believe that looking
-                                    good</span>Designed to Precision </h2>
+                        <h2 class="heading-2 white-color">{!! $page->sections[8]->value !!}</h2>
                     </div>
                 </div>
             </div>
@@ -80,39 +80,39 @@
                     $products = \App\Product::take(6)->get();
                 @endphp
 
-                @foreach($products as $product)
+                @foreach ($products as $product)
                     <div class="col-lg-4" data-aos="fade-down-right" data-aos-duration="500">
-                        <a href="{{route('front.productDetail', $product->id)}}">
+                        <a href="{{ route('front.productDetail', $product->id) }}">
                             <div class="section-3-main-box">
                                 <div class="section-3-main-box-img">
                                     <div class="slide-1 owl-carousel owl-theme">
                                         <div class="item">
                                             <div class="section-3-main-img">
-                                                <figure><img src="{{asset($product->image)}}" alt=""
-                                                             class="img-fluid"></figure>
+                                                <figure><img src="{{ asset($product->image) }}" alt=""
+                                                        class="img-fluid"></figure>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="section-3-main-box-text">
                                     <div class="section-3-main-box-text1">
-    {{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover--}}
-    {{--                                        1J311</p>--}}
+                                        {{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover --}}
+                                        {{--                                        1J311</p> --}}
                                         <p class="para-1 white-color">
-                                            {{$product->product_title}}
+                                            {{ $product->product_title }}
                                         </p>
-                                        <strong class="white-color">${{$product->price}}</strong>
+                                        <strong class="white-color">${{ $product->price }}</strong>
                                     </div>
                                     <div class="section-3-main-box-text2">
-    {{--                                    <ul class="main-box">--}}
-    {{--                                        <li><span class="main-color-box red-box"></span></li>--}}
-    {{--                                        <li><span class="main-color-box white-box"></span></li>--}}
-    {{--                                        <li><span class="main-color-box yellow-box"></span></li>--}}
-    {{--                                    </ul>--}}
-{{--                                        <ul class="main-icon">--}}
-{{--                                            <li><i class="far fa-heart red-icon"></i></li>--}}
-{{--                                            <li><i class="fas fa-lock black-icon"></i></li>--}}
-{{--                                        </ul>--}}
+                                        {{--                                    <ul class="main-box"> --}}
+                                        {{--                                        <li><span class="main-color-box red-box"></span></li> --}}
+                                        {{--                                        <li><span class="main-color-box white-box"></span></li> --}}
+                                        {{--                                        <li><span class="main-color-box yellow-box"></span></li> --}}
+                                        {{--                                    </ul> --}}
+                                        {{--                                        <ul class="main-icon"> --}}
+                                        {{--                                            <li><i class="far fa-heart red-icon"></i></li> --}}
+                                        {{--                                            <li><i class="fas fa-lock black-icon"></i></li> --}}
+                                        {{--                                        </ul> --}}
                                     </div>
                                 </div>
                             </div>
@@ -135,18 +135,17 @@
                             <span class="green">$ 59.99</span>
                             <span class="silver"><i class="fas fa-heart"></i> 234</span>
                         </div>
-                        <h3 class="heading-3">Hand made embroidery <span class="d-block"></span> Shirt piece</h3>
-                        <p class="para-1">Lorem ipsum dolor sit amet consectetur adipisicing elit <span
-                                    class="d-block"></span> sed do eiusmod tempor incididunt </p>
+                        <h3 class="heading-3">{!! $page->sections[9]->value !!}</h3>
+                        <p class="para-1">{!! $page->sections[10]->value !!}</p>
                         <div class="section-4-text-anker section-4-text-main">
-                            <a href="{{route('front.shop')}}" class="btn custome-btn green-btn mr-1">Shop Now</a>
+                            <a href="{{ route('front.shop') }}" class="btn custome-btn green-btn mr-1">Shop Now</a>
                             <span class="silver"><i class="fas fa-shopping-bag"></i> Add to Cart</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-duration="500">
                     <div class="section-4-img">
-                        <img src="{{asset('images/section-4-img-1.png')}}" alt="" class="img-fluid">
+                        <img src="{!! $page->sections[11]->value !!}" alt="" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -159,9 +158,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-3-text text-center"  data-aos="fade-down" data-aos-duration="500">
-                        <h2 class="heading-2 white-color"><span class="d-block">We believe that looking
-                                    good</span>Best Selling Products</h2>
+                    <div class="section-3-text text-center" data-aos="fade-down" data-aos-duration="500">
+                        <h2 class="heading-2 white-color"><span class="d-block">{!! $page->sections[12]->value !!}</h2>
                     </div>
                 </div>
             </div>
@@ -170,39 +168,39 @@
                     $products = \App\Product::take(3)->get();
                 @endphp
 
-                @foreach($products as $product)
+                @foreach ($products as $product)
                     <div class="col-lg-4" data-aos="fade-down-right" data-aos-duration="500">
-                        <a href="{{route('front.productDetail', $product->id)}}">
+                        <a href="{{ route('front.productDetail', $product->id) }}">
                             <div class="section-3-main-box">
                                 <div class="section-3-main-box-img">
                                     <div class="slide-1 owl-carousel owl-theme">
                                         <div class="item">
                                             <div class="section-3-main-img">
-                                                <figure><img src="{{asset($product->image)}}" alt=""
-                                                             class="img-fluid"></figure>
+                                                <figure><img src="{{ asset($product->image) }}" alt=""
+                                                        class="img-fluid"></figure>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="section-3-main-box-text">
                                     <div class="section-3-main-box-text1">
-                                        {{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover--}}
-                                        {{--                                        1J311</p>--}}
+                                        {{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover --}}
+                                        {{--                                        1J311</p> --}}
                                         <p class="para-1 white-color">
-                                            {{$product->product_title}}
+                                            {{ $product->product_title }}
                                         </p>
-                                        <strong class="white-color">${{$product->price}}</strong>
+                                        <strong class="white-color">${{ $product->price }}</strong>
                                     </div>
                                     <div class="section-3-main-box-text2">
-                                        {{--                                    <ul class="main-box">--}}
-                                        {{--                                        <li><span class="main-color-box red-box"></span></li>--}}
-                                        {{--                                        <li><span class="main-color-box white-box"></span></li>--}}
-                                        {{--                                        <li><span class="main-color-box yellow-box"></span></li>--}}
-                                        {{--                                    </ul>--}}
-{{--                                        <ul class="main-icon">--}}
-{{--                                            <li><i class="far fa-heart red-icon"></i></li>--}}
-{{--                                            <li><i class="fas fa-lock black-icon"></i></li>--}}
-{{--                                        </ul>--}}
+                                        {{--                                    <ul class="main-box"> --}}
+                                        {{--                                        <li><span class="main-color-box red-box"></span></li> --}}
+                                        {{--                                        <li><span class="main-color-box white-box"></span></li> --}}
+                                        {{--                                        <li><span class="main-color-box yellow-box"></span></li> --}}
+                                        {{--                                    </ul> --}}
+                                        {{--                                        <ul class="main-icon"> --}}
+                                        {{--                                            <li><i class="far fa-heart red-icon"></i></li> --}}
+                                        {{--                                            <li><i class="fas fa-lock black-icon"></i></li> --}}
+                                        {{--                                        </ul> --}}
                                     </div>
                                 </div>
                             </div>
@@ -220,22 +218,22 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-6-text text-center" data-aos="fade-right" data-aos-duration="500">
-                        <h2 class="heading-2 black-color">Recent Blogs</h2>
+                        <h2 class="heading-2 black-color">{!! $page->sections[13]->value !!}</h2>
                     </div>
                 </div>
-                @foreach(\App\Blog::all()->take(3) as $blog)
+                @foreach (\App\Blog::all()->take(3) as $blog)
                     <div class="col-lg-4">
-                        <a href="{{route('blog_detail', $blog->id)}}">
+                        <a href="{{ route('blog_detail', $blog->id) }}">
                             <div class="section-6-main" data-aos="fade-up-right" data-aos-duration="500">
                                 <div class="section-6-main-img">
-                                    <img src="{{asset($blog->image)}}" alt="" class="img-fluid">
+                                    <img src="{{ asset($blog->image) }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="section-6-main-text">
-    {{--                                <div class="section-6-main-text-inner">--}}
-    {{--                                    <span><i class="fas fa-comment"></i> 15</span>--}}
-    {{--                                    <span><i class="far fa-heart"></i> 32</span>--}}
-    {{--                                </div>--}}
-                                    <h6 class="heading-6 black-color">{{$blog->name}}</h6>
+                                    {{--                                <div class="section-6-main-text-inner"> --}}
+                                    {{--                                    <span><i class="fas fa-comment"></i> 15</span> --}}
+                                    {{--                                    <span><i class="far fa-heart"></i> 32</span> --}}
+                                    {{--                                </div> --}}
+                                    <h6 class="heading-6 black-color">{{ $blog->name }}</h6>
                                     <p class="para-1">
                                         {!! $blog->short_detail !!}
                                     </p>
@@ -251,11 +249,11 @@
 @endsection
 
 @section('css')
-<style>
+    <style>
 
-</style>
+    </style>
 @endsection
 
 @section('js')
-<script type="text/javascript"></script>
+    <script type="text/javascript"></script>
 @endsection

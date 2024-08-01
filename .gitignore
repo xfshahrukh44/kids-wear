@@ -14,6 +14,7 @@ yarn-error.log
 /public/video
 .env
 .htaccess
+/public/.htaccess
 *.zip
 *.rar
 *.mp4

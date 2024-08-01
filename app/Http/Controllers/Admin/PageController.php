@@ -30,17 +30,17 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','view-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'view-' . $model)->first() != null) {
             $keyword = $request->get('search');
             $perPage = 25;
 
             if (!empty($keyword)) {
                 $page = Page::where('page_name', 'LIKE', "%$keyword%")
-                ->orWhere('name', 'LIKE', "%$keyword%")
-                ->orWhere('content', 'LIKE', "%$keyword%")
-                ->orWhere('image', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
+                    ->orWhere('name', 'LIKE', "%$keyword%")
+                    ->orWhere('content', 'LIKE', "%$keyword%")
+                    ->orWhere('image', 'LIKE', "%$keyword%")
+                    ->paginate($perPage);
             } else {
                 $page = Page::paginate($perPage);
             }
@@ -58,8 +58,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','add-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'add-' . $model)->first() != null) {
             return view('admin.page.create');
         }
         return response(view('403'), 403);
@@ -75,28 +75,28 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','add-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'add-' . $model)->first() != null) {
             $this->validate($request, [
-			'page_name' => 'required',
-			'name' => 'required',
-			'content' => 'required'
-		]);
+                'page_name' => 'required',
+                'name' => 'required',
+                'content' => 'required'
+            ]);
             $page = new page;
-           
-            $page->page_name = $request->input('page_name');   
-            $page->name = $request->input('name');   
-            $page->arabic_name = $request->input('arabic_name');   
-            $page->content = $request->input('content');               
-            $page->arabic_content = $request->input('arabic_content');               
+
+            $page->page_name = $request->input('page_name');
+            $page->name = $request->input('name');
+            $page->arabic_name = $request->input('arabic_name');
+            $page->content = $request->input('content');
+            $page->arabic_content = $request->input('arabic_content');
             $file = $request->file('image');
             if ($request->hasFile('image')) {
-            $destination_path = 'uploads/pages/';
-            $profileImage = date("Ymd").".".$file->getClientOriginalExtension();
-            Image::make($file)->save(public_path($destination_path) . DIRECTORY_SEPARATOR. $profileImage);
-       
-            $page->image = $destination_path.$profileImage;
-			}
+                $destination_path = 'uploads/pages/';
+                $profileImage = date("Ymd") . "." . $file->getClientOriginalExtension();
+                Image::make($file)->save(public_path($destination_path) . DIRECTORY_SEPARATOR . $profileImage);
+
+                $page->image = $destination_path . $profileImage;
+            }
             $page->save();
             return redirect('admin/page')->with('flash_message', 'Page added!');
         }
@@ -112,8 +112,8 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','view-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'view-' . $model)->first() != null) {
             $page = Page::findOrFail($id);
             return view('admin.page.show', compact('page'));
         }
@@ -129,8 +129,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','edit-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'edit-' . $model)->first() != null) {
             $page = Page::findOrFail($id);
             return view('admin.page.edit', compact('page'));
         }
@@ -148,16 +148,14 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         $check = db::table('section')->where('page_id', $id)->get();
-        foreach($check as $checks)
-        {
-            if($checks->type == 'image')
-            {
+        foreach ($check as $checks) {
+            if ($checks->type == 'image') {
                 if ($request->hasFile($checks->slug)) {
-            
+
                     $section = section::where('id', $checks->id)->first();
-                    $image_path = public_path($section->image); 
-                    
-                    if(File::exists($image_path)) {
+                    $image_path = public_path($section->image);
+
+                    if (File::exists($image_path)) {
                         File::delete($image_path);
                     }
 
@@ -166,91 +164,85 @@ class PageController extends Controller
                     $fileNameForm = str_replace(' ', '_', $fileNameExt);
                     $fileName = pathinfo($fileNameForm, PATHINFO_FILENAME);
                     $fileExt = $request->file($checks->slug)->getClientOriginalExtension();
-                    $fileNameToStore = $fileName.$checks->id.'_'.time().'.'.$fileExt;
+                    $fileNameToStore = $fileName . $checks->id . '_' . time() . '.' . $fileExt;
                     $pathToStore = public_path('uploads/pages/');
-                    Image::make($file)->save($pathToStore . DIRECTORY_SEPARATOR. $fileNameToStore);
-                    DB::table('section')->where('id',$checks->id)
+                    Image::make($file)->save($pathToStore . DIRECTORY_SEPARATOR . $fileNameToStore);
+                    DB::table('section')->where('id', $checks->id)
                         ->update(
                             array(
-                                'value'=>'uploads/pages/'.$fileNameToStore
+                                'value' => 'uploads/pages/' . $fileNameToStore
                             )
-                        );            
+                        );
                 }
 
-            }
+            } elseif ($checks->type == 'video') {
+                if ($request->hasFile($checks->slug)) {
 
-            elseif($checks->type == 'video')
-            {
-                if($request->hasFile($checks->slug))
-                {
-                    
                     $section = section::where('id', $checks->id)->first();
-                    $image_path = public_path($section->image); 
-                    
-                    if(File::exists($image_path)) {
+
+                    $image_path = public_path($section->image);
+
+                    if (File::exists($image_path)) {
                         File::delete($image_path);
                     }
 
                     $file = $request->file($checks->slug);
-                    $filenameWithExt= $request->file($checks->slug)->getClientOriginalName();
+                    $filenameWithExt = $request->file($checks->slug)->getClientOriginalName();
                     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                     $extension = $request->file($checks->slug)->getClientOriginalExtension();
-                    $fileNameToStore = $filename. '_'.time().'.'.$extension;
-                    $path =  public_path('uploads/videos/');
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = public_path('uploads/videos/');
                     $file->move($path, $fileNameToStore);
-                    DB::table('section')->where('id',$checks->id)
+                    DB::table('section')->where('id', $checks->id)
+                        ->update(
+                            array(
+                                'value' => 'uploads/videos/' . $fileNameToStore
+                            )
+                        );
+                }
+
+            } else {
+
+                DB::table('section')->where('id', $checks->id)
                     ->update(
                         array(
-                            'value'=>'uploads/videos/'.$fileNameToStore
+                            'value' => $request->input($checks->slug),
                         )
-                    );     
-                }
-                
-            }
-
-            else
-            {
-
-                 DB::table('section')->where('id',$checks->id)
-                ->update(
-                    array(
-                        'value'=>$request->input($checks->slug),
-                    )
-                ); 
+                    );
             }
 
         }
 
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','edit-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'edit-' . $model)->first() != null) {
             $this->validate($request, [
-			'page_name' => 'required',
-			'name' => 'required',
-			'content' => 'required'
-		]);
+                'page_name' => 'required',
+                'name' => 'required',
+                'content' => 'required'
+            ]);
             $requestData = $request->all();
-            
 
-        if ($request->hasFile('image')) {
-            
-            $page = page::where('id', $id)->first();
-            $image_path = public_path($page->image); 
-            
-            if(File::exists($image_path)) {
-                File::delete($image_path);
+
+            if ($request->hasFile('image')) {
+
+                $page = page::where('id', $id)->first();
+                $image_path = public_path($page->image);
+
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+
+                $file = $request->file('image');
+                $fileNameExt = $request->file('image')->getClientOriginalName();
+                $fileNameForm = str_replace(' ', '_', $fileNameExt);
+                $fileName = pathinfo($fileNameForm, PATHINFO_FILENAME);
+                $fileExt = $request->file('image')->getClientOriginalExtension();
+                $fileNameToStore = $fileName . '_' . time() . '.' . $fileExt;
+                $pathToStore = public_path('uploads/pages/');
+                Image::make($file)->save($pathToStore . DIRECTORY_SEPARATOR . $fileNameToStore);
+
+                $requestData['image'] = 'uploads/pages/' . $fileNameToStore;
             }
-
-            $file = $request->file('image');
-            $fileNameExt = $request->file('image')->getClientOriginalName();
-            $fileNameForm = str_replace(' ', '_', $fileNameExt);
-            $fileName = pathinfo($fileNameForm, PATHINFO_FILENAME);
-            $fileExt = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'_'.time().'.'.$fileExt;
-            $pathToStore = public_path('uploads/pages/');
-            Image::make($file)->save($pathToStore . DIRECTORY_SEPARATOR. $fileNameToStore);
-
-             $requestData['image'] = 'uploads/pages/'.$fileNameToStore;               
-        }
 
 
             $page = Page::findOrFail($id);
@@ -270,8 +262,8 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $model = str_slug('page','-');
-        if(auth()->user()->permissions()->where('name','=','delete-'.$model)->first()!= null) {
+        $model = str_slug('page', '-');
+        if (auth()->user()->permissions()->where('name', '=', 'delete-' . $model)->first() != null) {
             Page::destroy($id);
 
             return redirect('admin/page')->with('flash_message', 'Page deleted!');
