@@ -175,7 +175,7 @@ body {
 
 .main-header .main-anker li a {
     font-size: 16px;
-    color: var(--silver-color) !important;
+    color: var(--silver-color);
     padding: 0;
     margin-left: 12px;
     font-weight: 600;

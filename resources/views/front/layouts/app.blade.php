@@ -124,6 +124,196 @@
         .editable-wrapper a.edit {
             background-color: #007bff;
         }
+
+        /* 8/5/2024 new css */
+
+
+
+
+        .sidebar-nav {
+            padding: 9px 0
+        }
+
+        .dropdown-menu {
+            border-radius: 0;
+        }
+
+        .dropdown-menu .sub-menu {
+            left: 100%;
+            position: absolute;
+            top: 0;
+            visibility: hidden;
+            margin-top: -1px
+        }
+
+        .dropdown-menu li:hover .sub-menu {
+            visibility: visible
+        }
+
+        .nav-tabs .dropdown-menu,
+        .nav-pills .dropdown-menu,
+        .navbar .dropdown-menu {
+            margin-top: 0
+        }
+
+        .navbar .sub-menu:before {
+            border-bottom: 7px solid transparent;
+            border-left: none;
+            border-right: 7px solid rgba(0, 0, 0, 0.2);
+            border-top: 7px solid transparent;
+            left: -7px;
+            top: 10px
+        }
+
+        .navbar .sub-menu:after {
+            border-top: 6px solid transparent;
+            border-left: none;
+            border-right: 6px solid #fff;
+            border-bottom: 6px solid transparent;
+            left: 10px;
+            top: 11px;
+            left: -6px
+        }
+
+        .dropdown-submenu {
+            /* position: relative; */
+        }
+
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            border-radius: 0;
+            width: 0px;
+        }
+
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+            width: 800px;
+            border-radius: 10px;
+            margin-left: 10px !important;
+            background: var(--purple-color);
+        }
+
+        .dropdown-submenu>a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #cccccc;
+            margin-top: 5px;
+            margin-right: -10px;
+            display: none;
+        }
+
+        .dropdown-submenu:hover>a:after {
+            border-left-color: #ffffff;
+            display: none;
+        }
+
+        .dropdown-submenu .pull-left {
+            float: none;
+        }
+
+        .dropdown-submenu.pull-left>.dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+
+        .dropdown:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .navbar {
+            padding: 0;
+            height: 71px;
+        }
+
+        li.nav-item {
+            height: 71px;
+            line-height: 61px;
+        }
+
+        ul.dropdown-menu li {
+            /* height: 35px; */
+            line-height: 35px;
+        }
+
+
+        /*****************************/
+        .slideInUp {
+            -webkit-animation-name: slideInUp;
+            animation-name: slideInUp;
+            -webkit-animation-duration: .2s;
+            animation-duration: .2s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        @-webkit-keyframes slideInUp {
+            0% {
+                -webkit-transform: translateY(30%);
+                transform: translateY(30%);
+                visibility: visible;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                -webkit-transform: translateY(30%);
+                transform: translateY(30%);
+                visibility: visible;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+
+
+        .dropdown-menu.slideInUp {
+            background: var(--purple-color);
+            border-radius: 10px;
+        }
+
+        .dropdown-menu.slideInUp li a {
+            color: white !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 10px !important;
+        }
+
+        .main-header .main-anker li a h5 {
+            color: var(--white-color);
+            font-weight: 900;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .sub_menu_rtl {
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+        .sub_menu_rtl li a {
+            font-size: 14px;
+        }
+
+        /* 8/5/2024 new css */
     </style>
     @yield('styles')
     @yield('css')
@@ -176,8 +366,532 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item dropdown">
                                             <a class="nav-link" href="{{ route('front.categories') }}">Categories</a>
+
+                                            <ul class="dropdown-menu slideInUp" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Girls <i class="fas fa-angle-right"></i></a>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Baby and Toddlers</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Onesie's</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#"> Bloomers & Romper's</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Set's</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Casual baby girl's
+                                                                                dresses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Cardigan</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pajamas</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Snow Jumpsuits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Skirts and pants</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Jeans</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Snickers</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Sandles</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories</a>
+                                                                        </li>
+
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Christening</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Gown's and Dresses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Candle</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Hair Accessories</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Blankets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Bibs</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories</a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Communion</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Dresses and Gowns</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Bolero</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Petticoats & Slips</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Purses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Rosary</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Veils & Hair
+                                                                                Accessories</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories</a>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Flower Suits</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Flower Girls Dresses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Kids Clothing</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Parka</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Girl Tops</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Girl Swim Suits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Socks</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Boys <i class="fas fa-angle-right"></i></a>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Baby and Toddlers</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Boys Onesie's</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#"> Baby boys Sets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Rompers</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pajamas</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Boots</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">T-Shirts</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Short Pants & Casual
+                                                                                Outfit</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Flannels</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Long Sleeve</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Boys Swim Wear</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Coats</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Snow Jump Suits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pants and Jackets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Boys Outset</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Sneakers</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">accessories</a>
+                                                                        </li>
+
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Christening</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Baby Boys Suits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Rompers</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">candles</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Blankets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories</a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Communion</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Boys Suits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Ties & Bow Ties</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Gloves</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Rosery Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Accessories
+                                                                            </a>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Flower Suits</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Flower Girls Dresses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Kids Clothing</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Suits</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Boy Tops</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pajamas</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Belts</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Shoes</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Flannels</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Suspenders</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Sweatpants</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pants</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Long & Short Sleeve
+                                                                                Shirts</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Others <i class="fas fa-angle-right"></i></a>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Bedding
+                                                                                </h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Bedding Sheet
+                                                                                Comforters</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#"> Blankets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pillows</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Comforter Sets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Breast Feeding</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pillow Gaz Reflex Bed
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Bed Wetting Alarm</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Bathing</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Towels and Cloth Wash</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Burp Cloth & Baby Bathing
+                                                                                Mat</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Bag Organizer & Mom
+                                                                                Bags</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Wipes Warmer & Wipes
+                                                                                Portable Bags</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Diaper Disposal</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Diaper Bags Disposal
+                                                                            </a>
+                                                                        </li>
+
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Feeding</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Bibs</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Slipper Bottles and Sippy
+                                                                                Cups</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Snack Container</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pacifier Holder</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Nipple Replacement
+                                                                                Silicon</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Brush Cleaner</a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Stollers and Car Seats</h5>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Stollers and Car
+                                                                                Seats</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Carrier</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Stroller Accessories
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Baby Furniture</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Bassinet</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Craddle</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Crib's Mattresses</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Playmat</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Swing</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">High Chair</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Bouncer</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Tricycle</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="sub_menu_rtl">
+                                                                    <ul>
+
+
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <h5>Nursery & Decor</h5>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Crib Bedding Set</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Blankets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Blankets</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Pillow Gaz Reflex</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Monitoring
+                                                                                Camera</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Baby Wall Frame</a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#">Wall Sticker</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Humidifier</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('blog') }}">Blogs</a>
@@ -192,10 +906,12 @@
                                     <form class="form-inline my-2 my-lg-0 header-btn-2"
                                         action="{{ route('front.shop') }}">
                                         <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                            aria-label="Search" value="{{ request()->get('search') }}" name="search">
+                                            aria-label="Search" value="{{ request()->get('search') }}"
+                                            name="search">
                                         <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                                         @if (auth()->check())
-                                            <a href="{{ route('account') }}" class="btn"><i class="far fa-user"></i>
+                                            <a href="{{ route('account') }}" class="btn"><i
+                                                    class="far fa-user"></i>
                                                 Account</a>
                                         @else
                                             <a href="{{ route('signin') }}" class="btn"><i
@@ -406,6 +1122,14 @@
                     }
                 },
             });
+        });
+
+        $(document).mousemove(function() {
+            if ($(".categories_hover:hover").length != 0) {
+                $('.show_categories').addClass('open');
+            } else {
+                $('.show_categories').removeClass('open');
+            }
         });
     </script>
     <script>
