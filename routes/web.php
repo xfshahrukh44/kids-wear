@@ -272,3 +272,7 @@ Route::resource('upcomingclasses', 'UpcomingclassesController');
 
 
 Route::resource('admin/faq', 'Admin\FaqController');
+
+
+Route::get('/set_sub_category', 'Admin\ProductController@set_sub_category')->name('set_sub_category');
+Route::get('/set_child_sub_category', 'Admin\ProductController@set_child_sub_category')->name('set_child_sub_category');

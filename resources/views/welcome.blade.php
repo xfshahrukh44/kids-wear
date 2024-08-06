@@ -41,7 +41,7 @@
                                 'Other' => asset('images/section-2-slider-img-4.png'),
                             ];
                         @endphp
-                        @foreach (\App\Category::all() as $category)
+                        @foreach (\App\Category::where('is_featured', 1)->get() as $category)
                             <div class="item" data-aos="fade-right" data-aos-duration="500">
                                 <a href="{{ route('front.shop', ['category_id' => $category->id]) }}">
                                     <div class="section-2-slider-main">

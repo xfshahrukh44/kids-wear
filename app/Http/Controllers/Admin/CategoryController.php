@@ -92,6 +92,7 @@ class CategoryController extends Controller
                 Image::make($file)->save(public_path($destination_path) . DIRECTORY_SEPARATOR. $profileImage);
 
                 $category->image = $destination_path.$profileImage;
+                $category->is_featured = $request->is_featured;
                 $category->save();
             }
 

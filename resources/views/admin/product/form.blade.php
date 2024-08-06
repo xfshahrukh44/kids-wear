@@ -1,11 +1,42 @@
 <div class="form-body">
     <div class="row">
+
         <div class="col-md-12">
             <div class="form-group">
-               {!! Form::Label('item', 'Select Category:') !!}
-               {!! Form::select('item_id', $items, isset($product)?$product->category:null, ['class' => 'form-control']) !!}
+                {!! Form::Label('category', 'Select Category:') !!}
+                <select name="category" class="form-control" id="category" required>
+                    <option value="0"> Select Category </option>
+                    @foreach($items as $key => $val_items)
+                        <option value="{{ $val_items->id }}"> {{ $val_items->name }} </option>
+                    @endforeach
+                </select>
             </div>
         </div>
+
+
+
+        <div class="col-md-12" id="subcategory_sec" >
+            <div class="form-group">
+                {!! Form::Label('item', 'Select Sub-Category:') !!}
+                <select name="subcategory" id="subcategory" class="form-control">
+
+                </select>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-12" id="childsubcategory_sec" >
+            <div class="form-group">
+                {!! Form::Label('item', 'Select Child Sub-Category:') !!}
+                <select name="childsubcategory" id="childsubcategory" class="form-control">
+
+                </select>
+            </div>
+        </div>
+
+
         <div class="col-md-12">
             <div class="form-group">
                {!! Form::label('product_title', 'Product Title') !!}
@@ -143,3 +174,144 @@
 <div class="form-actions text-right pb-0">
     {!! Form::submit(isset($submitButtonText) ? $submitButtonText : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+        $('#subcategory_sec').hide();
+
+
+        $('#category').change(function() {
+
+            var get_id = $('#category').val();
+
+            // alert(get_id);
+
+            if(get_id == '0'){
+
+                $('#subcategory_sec').hide(500);
+
+            }else{
+
+                $('#subcategory_sec').show(500);
+
+            }
+
+
+            $.ajax({
+                url: "{{route('set_sub_category')}}",
+                type: "get",
+                dataType: "json",
+                data: {
+
+                    "_token": "{{ csrf_token() }}",
+                    get_id:get_id
+
+                },
+                success: function (response) {
+
+
+                    if (response.status) {
+
+                        console.log(response.getsub_category);
+                        const options = response.getsub_category;
+                        $('#subcategory').empty();
+                        const selectElement = $('#subcategory');
+                        const optionElement1 = $('<option></option>').attr('value', 0).text('----');
+                        selectElement.append(optionElement1);
+                        options.forEach((option) => {
+                            const { id, name } = option;
+                            const optionElement = $('<option></option>').attr('value', id).text(name);
+                            selectElement.append(optionElement);
+                        });
+
+                    } else {
+                        toastr.success(response.error);
+                    }
+
+
+                }
+            });
+
+        });
+
+
+// Child Sub-Category Section
+
+        $('#childsubcategory_sec').hide();
+
+        $('#subcategory').change(function() {
+
+            var get_child_id = $('#subcategory').val();
+
+// alert(get_child_id);
+
+            if(get_child_id == '0'){
+
+                $('#childsubcategory_sec').hide(500);
+
+            }else{
+
+                $('#childsubcategory_sec').show(500);
+
+            }
+
+            $.ajax({
+                url: "{{route('set_child_sub_category')}}",
+                type: "get",
+                dataType: "json",
+                data: {
+
+                    "_token": "{{ csrf_token() }}",
+                    get_child_id:get_child_id
+
+                },
+                success: function (response) {
+
+
+                    if (response.status) {
+
+                        console.log(response.get_child_sub_category);
+
+                        const options = response.get_child_sub_category;
+
+                        $('#childsubcategory').empty();
+
+                        const selectElement = $('#childsubcategory');
+
+                        options.forEach((option) => {
+
+                            const { id, name } = option;
+                            const optionElement = $('<option></option>').attr('value', id).text(name);
+                            selectElement.append(optionElement);
+
+                        });
+
+
+                    } else {
+
+                        toastr.success(response.error);
+
+                    }
+
+
+                }
+            });
+
+
+
+
+        });
+
+
+
+
+
+
+    });
+
+
+
+</script>

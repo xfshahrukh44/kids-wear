@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Models\Childsubcategory;
+use App\Models\Subcategory;
 use App\orders;
 use App\orders_products;
 use App\Product;
@@ -84,8 +86,9 @@ class ProductController extends Controller
             $attval = AttributeValue::all();
 
 			// $items = Category::all(['id', 'name']);
-			$items = Category::pluck('name', 'id');
-			
+//			$items = Category::pluck('name', 'id');
+			$items = Category::where('parent', 0)->get();
+
             return view('admin.product.create', compact('items', 'att','attval'));
         }
         return response(view('403'), 403);
@@ -101,13 +104,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-  
-	    //echo "<pre>";
-	    //print_r($_FILES);
-	    //return;
-	    
-		//dd($_FILES);
         $model = str_slug('product','-');
         if(auth()->user()->permissions()->where('name','=','add-'.$model)->first()!= null) {
             $this->validate($request, [
@@ -115,7 +111,7 @@ class ProductController extends Controller
 			'description' => 'required',
 			'price' => 'required',
 			'image' => 'required',
-			'item_id' => 'required',
+//			'item_id' => 'required',
 		]);
 		
 		    //echo implode(",",$_POST['language']);
@@ -124,8 +120,19 @@ class ProductController extends Controller
            
             $product->product_title = $request->input('product_title');      
 			$product->price = $request->input('price');   
-            $product->description = $request->input('description');   
-			$product->category = $request->input('item_id');     
+            $product->description = $request->input('description');
+
+//			$product->category = $request->input('item_id');
+            if($request->has('childsubcategory') && $request->get('childsubcategory') != '0') {
+                $product->category = $request->get('childsubcategory');
+            } else if($request->has('subcategory') && $request->get('subcategory') != '0') {
+                $product->category = $request->get('subcategory');
+            } else if($request->has('category') && $request->get('category') != '0') {
+                $product->category = $request->get('subcategory');
+            } else {
+			    $product->category = $request->input('item_id');
+            }
+
             $file = $request->file('image');
             
             //make sure yo have image folder inside your public
@@ -219,7 +226,8 @@ class ProductController extends Controller
             $att = Attributes::all();
             $product = Product::findOrFail($id);
 			
-			$items = Category::pluck('name', 'id');
+//			$items = Category::pluck('name', 'id');
+            $items = Category::where('parent', 0)->get();
 		
 			$product_images = DB::table('product_imagess')
                           ->where('product_id', $id)
@@ -247,14 +255,24 @@ class ProductController extends Controller
             $this->validate($request, [
 			'product_title' => 'required',
 			'description' => 'required',
-			'item_id' => 'required'
+//			'item_id' => 'required'
 		]);
 		
         $requestData['product_title'] = $request->input('product_title');
         $requestData['description'] = $request->input('description');
 		$requestData['sku'] = $request->input('sku');
 		$requestData['price'] = $request->input('price');
-		$requestData['category'] = $request->input('item_id');
+
+//		$requestData['category'] = $request->input('item_id');
+        if($request->has('childsubcategory') && $request->get('childsubcategory') != '0') {
+            $requestData['category'] = $request->get('childsubcategory');
+        } else if($request->has('subcategory') && $request->get('subcategory') != '0') {
+            $requestData['category'] = $request->get('subcategory');
+        } else if($request->has('category') && $request->get('category') != '0') {
+            $requestData['category'] = $request->get('subcategory');
+        } else {
+            $requestData['category'] = $request->input('item_id');
+        }
 
         // dump($request->input());
         // die();
@@ -444,6 +462,38 @@ class ProductController extends Controller
 						Session::flash('alert-class', 'alert-success'); 
 						return back();
 	
-	}	
+	}
+
+
+    public function set_sub_category()
+    {
+
+        $get_id = $_GET['get_id'];
+
+        //  dd("Hello");
+
+        $getsub_category = Category::where(['parent'=>$get_id])->get();
+
+        //    dd($getsub_category);
+
+        return response()->json(['status' => 'true', 'message'=>'subcategory','getsub_category'=>$getsub_category]);
+
+    }
+
+
+    public function set_child_sub_category()
+    {
+
+        $get_child_id = $_GET['get_child_id'];
+
+        //  dd($get_child_id);
+
+        $get_child_sub_category = Category::where(['parent'=>$get_child_id])->get();
+
+        //    dd($get_child_sub_category);
+
+        return response()->json(['status' => 'true', 'message'=>'subcategory','get_child_sub_category'=>$get_child_sub_category]);
+
+    }
 	
 }
