@@ -320,6 +320,23 @@
                 max-width: 700px;
             }
         }
+
+        /*nav styling*/
+        .sub_menu_rtl ul li a {
+            margin: 0 !important;
+        }
+
+        .sub_menu_rtl {
+            padding-left: 25px;
+        }
+
+        .sub_menu_rtl li {
+            list-style: disc;
+        }
+
+        .sub_menu_rtl ul li::marker {
+            color: white;
+        }
     </style>
     @yield('styles')
     @yield('css')
@@ -390,7 +407,7 @@
                                                                         <div class="col-3">
                                                                             <div class="sub_menu_rtl">
                                                                                 <ul>
-                                                                                    <li>
+                                                                                    <li style="list-style: none;">
                                                                                         <a href="{{route('front.shop', ['category_id' => $sub_category->id])}}">
                                                                                             <h5>{{$sub_category->name}}</h5>
                                                                                         </a>
