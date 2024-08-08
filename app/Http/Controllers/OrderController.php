@@ -384,61 +384,62 @@ class OrderController extends Controller
 		$order->order_item_total = $subtotal;
 
 
-		$total +=	$subtotal + $cart['shipping'];
+//		$total +=	$subtotal + $cart['shipping'];
+		$total = $subtotal + $cart['shipping'];
 
 		$order->order_total = $total;
 
 		$order->user_id = $id;
 
-		if (isset($_POST['payment_method']) && $_POST['payment_method'] == 'paypal') {
-			$order->transaction_id = $_POST['payment_id'];
-			$order->order_status = $_POST['payment_status'];
-			$order->card_token = $_POST['payer_id'];
-		} elseif (isset($_POST['payment_method']) && $_POST['payment_method'] == 'cash') {
-			$order->order_status = "succeeded";
-		} else {
-
-			try {
-
-
-
-				try {
-					Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-					$customer = \Stripe\Customer::create(array(
-						'email' => $request->email,
-						'name' => $request->first_name,
-						'phone' => $request->phone_no,
-						'description' => "Client Created From Website",
-						'source'  => $request->stripeToken,
-					));
-				} catch (Exception $e) {
-					return redirect()->back()->with('stripe_error', $e->getMessage());
-				}
-
-				try {
-					$charge = \Stripe\Charge::create(array(
-						'customer' => $customer->id,
-						'amount'   => $total * 100,
-						'currency' => 'USD',
-						'description' => "Payment From Website",
-						'metadata' => array("name" => $request->first_name, "email" => $request->email),
-					));
-				} catch (Exception $e) {
-					return redirect()->back()->with('stripe_error', $e->getMessage());
-				}
-			} catch (Exception $e) {
-				return redirect()->back()->with('stripe_error', $e->getMessage());
-			}
-			$chargeJson = $charge->jsonSerialize();
-			// Check whether the charge is successful 
-			if ($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1) {
-				$transactionID = $chargeJson['balance_transaction'];
-				$payment_status = $chargeJson['status'];
-				$order->transaction_id = $transactionID;
-				$order->order_status = $payment_status;
-			}
-		}
+//		if (isset($_POST['payment_method']) && $_POST['payment_method'] == 'paypal') {
+//			$order->transaction_id = $_POST['payment_id'];
+//			$order->order_status = $_POST['payment_status'];
+//			$order->card_token = $_POST['payer_id'];
+//		} elseif (isset($_POST['payment_method']) && $_POST['payment_method'] == 'cash') {
+//			$order->order_status = "succeeded";
+//		} else {
+//
+//			try {
+//
+//
+//
+//				try {
+//					Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+//
+//					$customer = \Stripe\Customer::create(array(
+//						'email' => $request->email,
+//						'name' => $request->first_name,
+//						'phone' => $request->phone_no,
+//						'description' => "Client Created From Website",
+//						'source'  => $request->stripeToken,
+//					));
+//				} catch (Exception $e) {
+//					return redirect()->back()->with('stripe_error', $e->getMessage());
+//				}
+//
+//				try {
+//					$charge = \Stripe\Charge::create(array(
+//						'customer' => $customer->id,
+//						'amount'   => $total * 100,
+//						'currency' => 'USD',
+//						'description' => "Payment From Website",
+//						'metadata' => array("name" => $request->first_name, "email" => $request->email),
+//					));
+//				} catch (Exception $e) {
+//					return redirect()->back()->with('stripe_error', $e->getMessage());
+//				}
+//			} catch (Exception $e) {
+//				return redirect()->back()->with('stripe_error', $e->getMessage());
+//			}
+//			$chargeJson = $charge->jsonSerialize();
+//			// Check whether the charge is successful
+//			if ($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1) {
+//				$transactionID = $chargeJson['balance_transaction'];
+//				$payment_status = $chargeJson['status'];
+//				$order->transaction_id = $transactionID;
+//				$order->order_status = $payment_status;
+//			}
+//		}
 
 		$record = orders::latest()->first();
 		$expNum = explode('-', $record->invoice_number);

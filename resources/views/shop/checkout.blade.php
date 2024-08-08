@@ -174,43 +174,43 @@
                     @if(Auth::check())
                     <?php  $_getUser= DB::table('users')->where('id', '=', Auth::user()->id)->first();?>
                     <div class="form-group">
-                        <input class="form-control" id="f-name" name="first_name" value="{{old('first_name')?old('first_name'):$_getUser->name}}" placeholder="First Name *" type="text" required>
+                        <input class="form-control" id="f-name" name="first_name" value="{{old('first_name')?old('first_name'):$_getUser->name}}" placeholder="First Name *" type="text" required required>
                         <span class="invalid-feedback fname {{ ($errors->first('first_name') ? 'd-block' : '') }}">
                           <strong>{{ $errors->first('first_name') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="address" name="address_line_1" placeholder="Address *" type="text" value="{{old('address_line_1')}}" required>
+                        <input class="form-control" id="address" name="address_line_1" placeholder="Address *" type="text" value="{{old('address_line_1')}}" required required>
                         <span class="invalid-feedback {{ ($errors->first('address_line_1') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('address_line_1') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control right" placeholder="Town / City *" name="city" id="city" type="text" required>
+                        <input class="form-control right" placeholder="Town / City *" name="city" id="city" type="text" required required>
                         <span class="invalid-feedback {{ ($errors->first('city') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('city') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country">
+                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country" required>
                         <span class="invalid-feedback {{ ($errors->first('country') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('country') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control right" placeholder="Phone *" name="phone_no" type="text" value="{{old('phone_no')}}" required>
+                        <input class="form-control right" placeholder="Phone *" name="phone_no" type="text" value="{{old('phone_no')}}" required required>
                         <span class="invalid-feedback {{ ($errors->first('phone_no') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('phone_no') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control left" name="email" placeholder="Email *" type="email" value="{{old('email')?old('email'):$_getUser->email}}" required>
+                        <input class="form-control left" name="email" placeholder="Email *" type="email" value="{{old('email')?old('email'):$_getUser->email}}" required required>
                         <span class="invalid-feedback {{ ($errors->first('email') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="zip_code" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}">
+                        <input class="form-control" id="zip_code" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}" required>
                     </div>
                     <div class="form-group">
                         <textarea class="form-control" id="comment" name="order_notes" placeholder="Order Note" rows="5">{{old('order_notes')}}</textarea>
@@ -220,40 +220,40 @@
                     <div class="form-group">
                         <span class="invalid-feedback fname" >
                         <strong>{{ $errors->first('first_name') }}</strong></span>
-                        <input class="form-control right" id="f-name" name="first_name" value="{{old('first_name')}}" placeholder="First Name" type="text">
+                        <input class="form-control right" id="f-name" name="first_name" value="{{old('first_name')}}" placeholder="First Name" type="text" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback lname" >
                         <strong>{{ $errors->first('last_name') }}</strong></span>
-                        <input class="form-control left" placeholder="Last Name" name="last_name" id="l-name" type="text" value="{{old('last_name')}}">
+                        <input class="form-control left" placeholder="Last Name" name="last_name" id="l-name" type="text" value="{{old('last_name')}}" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('address_line_1') }}</strong></span>
-                        <input class="form-control" id="address" name="address_line_1" placeholder="Address" type="text" value="{{old('address_line_1')}}">
+                        <input class="form-control" id="address" name="address_line_1" placeholder="Address" type="text" value="{{old('address_line_1')}}" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('city') }}</strong></span>
-                        <input class="form-control right" placeholder="Town / City" name="city" id="city" type="text">
+                        <input class="form-control right" placeholder="Town / City" name="city" id="city" type="text" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('country') }}</strong></span>
-                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country">
+                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('phone_no') }}</strong></span>
-                        <input class="form-control right" placeholder="Phone" name="phone_no" type="text" value="{{old('phone_no')}}">
+                        <input class="form-control right" placeholder="Phone" name="phone_no" type="text" value="{{old('phone_no')}}" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('email') }}</strong></span>
-                        <input class="form-control left" name="email" placeholder="Email" type="email" value="{{old('email')}}">
+                        <input class="form-control left" name="email" placeholder="Email" type="email" value="{{old('email')}}" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="compnayName" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}">
+                        <input class="form-control" id="compnayName" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}" required>
                     </div>
                     @if(!Auth::check())
                     <div class="form-group"> <label class="chkbox">
@@ -303,7 +303,7 @@
                     </div>
                 </div>
                 <div id="accordion" class="payment-accordion">
-                  <div class="card">
+                  <div class="card" hidden >
                     <div class="card-header" id="headingOne">
                       <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-payment="paypal">
@@ -321,7 +321,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card">
+                  <div class="card" hidden >
                     <div class="card-header" id="headingTwo">
                       <h5 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-payment="stripe">
@@ -341,6 +341,39 @@
                       </div>
                     </div>
                   </div>
+                    {{--clover--}}
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree" data-payment="stripe">
+                                    Pay with Credit Card <img src="{{ asset('images/payment1.png') }}" alt="" width="150">
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapsethree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <input type="hidden" name="amount" id="amount" value="{{$subtotal}}">
+                                    <div class="col-md-12 my-2">
+                                        <input class="form-control" type="number" name="card_number" id="card_number" placeholder="Card number">
+                                    </div>
+                                    <div class="col-md-4 my-2">
+                                        <input class="form-control" type="number" name="expiration_month" id="expiration_month" placeholder="Month">
+                                    </div>
+                                    <div class="col-md-4 my-2">
+                                        <input class="form-control" type="number" name="expiration_year" id="expiration_year" placeholder="Year">
+                                    </div>
+                                    <div class="col-md-4 my-2">
+                                        <input class="form-control" type="number" name="cvv" id="cvv" placeholder="CVV">
+                                    </div>
+                                    <div class="col-md-12 my-2">
+                                        <button class="btn btn-red btn-block" type="button" id="stripe-submit2">Pay Now ${{ $subtotal }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr>
 
@@ -562,6 +595,56 @@
         stripeTokenHandler(result.token);
       }
     });
+  });
+
+  $('#stripe-submit2').on('click', function (e) {
+      if (
+            $('#amount').val() == "" ||
+            $('#card_number').val() == "" ||
+            $('#expiration_month').val() == "" ||
+            $('#expiration_year').val() == "" ||
+            $('#cvv').val() == ""
+      ) {
+          alert('Please enter valid card information');
+
+          return false;
+      }
+
+      if(!document.getElementById('order-place').checkValidity()){
+          e.preventDefault();
+
+          return document.getElementById('order-place').reportValidity();
+      }
+
+      $.ajax({
+          url: '{{route('initiate-clover-payment')}}',
+          method: 'POST',
+          data: {
+              _token: '{{csrf_token()}}',
+              amount: $('#amount').val(),
+              number: $('#card_number').val(),
+              exp_month: $('#expiration_month').val(),
+              exp_year: $('#expiration_year').val(),
+              cvc: $('#cvv').val()
+          },
+          success: (data) => {
+              let data2 = JSON.parse(data);
+              if (data2.success) {
+                  toastr.success(data2.message);
+
+                  // setTimeout(() => {
+                      $('#order-place').submit();
+                  // }, 2000);
+              } else {
+                  toastr.error('Payment failed.');
+                  return false;
+              }
+          },
+          error: (e) => {
+              toastr.error(e);
+              return false;
+          }
+      });
   });
 
   function stripeTokenHandler(token) {

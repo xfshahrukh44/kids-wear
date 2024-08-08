@@ -12,6 +12,7 @@ use App\banner;
 use App\imagetable;
 use DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Mail;
 use View;
 use Session;
@@ -189,6 +190,47 @@ class HomeController extends Controller
         $page = DB::table('pages')->where('id', 1)->first();
 
         return view('contact', compact('page'));
+    }
+
+    public function initiateCloverPayment (Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required',
+            'number' => 'required',
+            'exp_month' => 'required',
+            'exp_year' => 'required',
+            'cvc' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return json_encode([
+                'success' => false,
+                'data' => [],
+                'message' => 'Payment failed!',
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        $order_id = create_clover_order();
+        if ($order_id) {
+            $payment_res = create_clover_payment($order_id, $request->amount, $request->number, $request->exp_month, $request->exp_year, $request->cvc);
+
+            if ($payment_res) {
+                return json_encode([
+                    'success' => true,
+                    'data' => [],
+                    'message' => 'Payment successful!',
+                    'errors' => [],
+                ]);
+            }
+        }
+
+        return json_encode([
+            'success' => false,
+            'data' => [],
+            'message' => "Couldn't create order.",
+            'errors' => [],
+        ]);
     }
 
 }
