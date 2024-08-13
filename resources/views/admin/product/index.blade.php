@@ -106,7 +106,7 @@
 
 <script>
     $(function () {
-        $('#myTable').DataTable();
+        // $('#myTable').DataTable();
         // var table = $('#example').DataTable({
         var table = $('#example2').DataTable({
             "columnDefs": [{
