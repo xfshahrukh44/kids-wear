@@ -337,6 +337,10 @@
         .sub_menu_rtl ul li::marker {
             color: white;
         }
+
+        .dropdown-menu.slideInUp li a:hover {
+            color: #b1e76f !important;
+        }
     </style>
     @yield('styles')
     @yield('css')

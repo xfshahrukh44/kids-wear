@@ -78,18 +78,19 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    @endforeach  
+                                    @endforeach
+                                    {{$product->links()}}
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Product Title</th>
-                                        <th>Product Price</th>
-                                        <th>Product Category</th>
-                                        <th>Product Image</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
+{{--                                <tfoot>--}}
+{{--                                    <tr>--}}
+{{--                                        <th>#</th>--}}
+{{--                                        <th>Product Title</th>--}}
+{{--                                        <th>Product Price</th>--}}
+{{--                                        <th>Product Category</th>--}}
+{{--                                        <th>Product Image</th>--}}
+{{--                                        <th>Actions</th>--}}
+{{--                                    </tr>--}}
+{{--                                </tfoot>--}}
                             </table>
                         </div>
                     </div>
@@ -106,7 +107,8 @@
 <script>
     $(function () {
         $('#myTable').DataTable();
-        var table = $('#example').DataTable({
+        // var table = $('#example').DataTable({
+        var table = $('#example2').DataTable({
             "columnDefs": [{
                 "visible": false,
                 "targets": 2
