@@ -80,7 +80,6 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                {{$product->links()}}
 {{--                                <tfoot>--}}
 {{--                                    <tr>--}}
 {{--                                        <th>#</th>--}}
@@ -92,6 +91,7 @@
 {{--                                    </tr>--}}
 {{--                                </tfoot>--}}
                             </table>
+                            {{$product->links()}}
                         </div>
                     </div>
                 </div>
