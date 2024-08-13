@@ -79,8 +79,8 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                    {{$product->links()}}
                                 </tbody>
+                                {{$product->links()}}
 {{--                                <tfoot>--}}
 {{--                                    <tr>--}}
 {{--                                        <th>#</th>--}}
