@@ -59,7 +59,7 @@ class AttributesValueController extends Controller
 
             $value = $request->value;
 
-            $attributes = AttributeValue::where('attribute_id' , $value)->get();
+            $attributes = AttributeValue::where('attribute_id' , $value)->orderBy('value', 'ASC')->get();
 
             if($attributes){
                 return response()->json(['message'=> $attributes, 'status' => true]);
