@@ -77,7 +77,7 @@
             </div>
             <div class="row secton-3-main">
                 @php
-                    $products = \App\Product::take(6)->get();
+                    $products = \App\Product::where('is_featured', 1)->take(6)->get();
                 @endphp
 
                 @foreach ($products as $product)
@@ -165,7 +165,7 @@
             </div>
             <div class="row secton-3-main p-0">
                 @php
-                    $products = \App\Product::take(3)->get();
+                    $products = \App\Product::where('is_best_selling', 1)->take(3)->get();
                 @endphp
 
                 @foreach ($products as $product)

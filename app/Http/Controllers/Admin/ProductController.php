@@ -122,6 +122,9 @@ class ProductController extends Controller
 			$product->price = $request->input('price');   
             $product->description = $request->input('description');
 
+            $product->is_featured = $request->input('is_featured');
+            $product->is_best_selling = $request->input('is_best_selling');
+
 //			$product->category = $request->input('item_id');
             if($request->has('childsubcategory') && $request->get('childsubcategory') != '0') {
                 $product->category = $request->get('childsubcategory');
@@ -262,6 +265,9 @@ class ProductController extends Controller
         $requestData['description'] = $request->input('description');
 		$requestData['sku'] = $request->input('sku');
 		$requestData['price'] = $request->input('price');
+
+		$requestData['is_featured'] = $request->input('is_featured');
+		$requestData['is_best_selling'] = $request->input('is_best_selling');
 
 //		$requestData['category'] = $request->input('item_id');
         if($request->has('childsubcategory') && $request->get('childsubcategory') != '0') {
