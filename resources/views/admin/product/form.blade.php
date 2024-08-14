@@ -53,8 +53,8 @@
             <div class="form-group">
                 {!! Form::label('is_featured', 'Featured product') !!}
                 <select name="is_featured" id="" class="form-control">
-                    <option value="1" {!! isset($product) && $product->is_featured == '1' ? 'selected' : '' !!}>Yes</option>
                     <option value="0" {!! isset($product) && $product->is_featured == '0' ? 'selected' : '' !!}>No</option>
+                    <option value="1" {!! isset($product) && $product->is_featured == '1' ? 'selected' : '' !!}>Yes</option>
                 </select>
             </div>
         </div>
@@ -62,8 +62,8 @@
             <div class="form-group">
                 {!! Form::label('is_best_selling', 'Best selling') !!}
                 <select name="is_best_selling" id="" class="form-control">
-                    <option value="1" {!! isset($product) && $product->is_best_selling == '1' ? 'selected' : '' !!}>Yes</option>
                     <option value="0" {!! isset($product) && $product->is_best_selling == '0' ? 'selected' : '' !!}>No</option>
+                    <option value="1" {!! isset($product) && $product->is_best_selling == '1' ? 'selected' : '' !!}>Yes</option>
                 </select>
             </div>
         </div>
