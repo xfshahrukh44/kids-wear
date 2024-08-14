@@ -158,7 +158,7 @@
           </div>
             <div class="col-md-7 col-lg-7 col-sm-7 col-xs-12">
                 <div class="section-heading dark-color">
-                    <h3>Billing Address</h3>
+                    <h3>Personal Information</h3>
                 </div>
                 @if (\Session::has('stripe_error'))
                 <div class="alert alert-danger">
@@ -171,46 +171,26 @@
                     <input type="hidden" name="payer_id" value="" />
                     <input type="hidden" name="payment_status" value="" />
                     <input type="hidden" name="payment_method" id="payment_method" value="paypal" />
+                    <input type="hidden" name="track_id" id="track_id" value="paypal" />
                     @if(Auth::check())
                     <?php  $_getUser= DB::table('users')->where('id', '=', Auth::user()->id)->first();?>
                     <div class="form-group">
-                        <input class="form-control" id="f-name" name="first_name" value="{{old('first_name')?old('first_name'):$_getUser->name}}" placeholder="First Name *" type="text" required required>
+                        <input class="form-control" id="first_name" name="first_name" value="{{old('first_name')?old('first_name'):$_getUser->name}}" placeholder="First Name *" type="text" required>
                         <span class="invalid-feedback fname {{ ($errors->first('first_name') ? 'd-block' : '') }}">
                           <strong>{{ $errors->first('first_name') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="address" name="address_line_1" placeholder="Address *" type="text" value="{{old('address_line_1')}}" required required>
-                        <span class="invalid-feedback {{ ($errors->first('address_line_1') ? 'd-block' : '') }}" >
-                          <strong>{{ $errors->first('address_line_1') }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control right" placeholder="Town / City *" name="city" id="city" type="text" required required>
-                        <span class="invalid-feedback {{ ($errors->first('city') ? 'd-block' : '') }}" >
-                          <strong>{{ $errors->first('city') }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country" required>
-                        <span class="invalid-feedback {{ ($errors->first('country') ? 'd-block' : '') }}" >
-                          <strong>{{ $errors->first('country') }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control right" placeholder="Phone *" name="phone_no" type="text" value="{{old('phone_no')}}" required required>
+                        <input class="form-control right" id="phone" placeholder="Phone *" name="phone_no" type="text" value="{{old('phone_no')}}" required>
                         <span class="invalid-feedback {{ ($errors->first('phone_no') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('phone_no') }}</strong>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input class="form-control left" name="email" placeholder="Email *" type="email" value="{{old('email')?old('email'):$_getUser->email}}" required required>
+                        <input class="form-control left" name="email" placeholder="Email *" type="email" value="{{old('email')?old('email'):$_getUser->email}}" required>
                         <span class="invalid-feedback {{ ($errors->first('email') ? 'd-block' : '') }}" >
                           <strong>{{ $errors->first('email') }}</strong>
                         </span>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" id="zip_code" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}" required>
                     </div>
                     <div class="form-group">
                         <textarea class="form-control" id="comment" name="order_notes" placeholder="Order Note" rows="5">{{old('order_notes')}}</textarea>
@@ -220,7 +200,7 @@
                     <div class="form-group">
                         <span class="invalid-feedback fname" >
                         <strong>{{ $errors->first('first_name') }}</strong></span>
-                        <input class="form-control right" id="f-name" name="first_name" value="{{old('first_name')}}" placeholder="First Name" type="text" required>
+                        <input class="form-control right" id="first_name" name="first_name" value="{{old('first_name')}}" placeholder="First Name" type="text" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback lname" >
@@ -229,31 +209,13 @@
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
-                        <strong>{{ $errors->first('address_line_1') }}</strong></span>
-                        <input class="form-control" id="address" name="address_line_1" placeholder="Address" type="text" value="{{old('address_line_1')}}" required>
-                    </div>
-                    <div class="form-group">
-                        <span class="invalid-feedback" >
-                        <strong>{{ $errors->first('city') }}</strong></span>
-                        <input class="form-control right" placeholder="Town / City" name="city" id="city" type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <span class="invalid-feedback" >
-                        <strong>{{ $errors->first('country') }}</strong></span>
-                        <input type="text" name="country" id="country" class="form-control left" placeholder="Country" required>
-                    </div>
-                    <div class="form-group">
-                        <span class="invalid-feedback" >
                         <strong>{{ $errors->first('phone_no') }}</strong></span>
-                        <input class="form-control right" placeholder="Phone" name="phone_no" type="text" value="{{old('phone_no')}}" required>
+                        <input class="form-control right" placeholder="Phone" name="phone_no" id="phone" type="text" value="{{old('phone_no')}}" required>
                     </div>
                     <div class="form-group">
                         <span class="invalid-feedback" >
                         <strong>{{ $errors->first('email') }}</strong></span>
                         <input class="form-control left" name="email" placeholder="Email" type="email" value="{{old('email')}}" required>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" id="compnayName" name="zip_code" placeholder="Postcode" type="text" value="{{old('zip_code')}}" required>
                     </div>
                     @if(!Auth::check())
                     <div class="form-group"> <label class="chkbox">
@@ -282,6 +244,50 @@
                         <textarea class="form-control" id="comment" name="order_notes" placeholder="Order Note" rows="5"></textarea>
                     </div>
                     @endif
+
+                    <fieldset id="fedexfieldset">
+                        <legend>Shipping Address</legend>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="searchTextField" name="googleaddress"
+                                   placeholder="Type Your Address" onchange="initialize()">
+                        </div>
+                        <div id="addressdiv">
+                            <input type="hidden" name="fedex-checker" value="0" id="fedex-checker">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="country" name="country"
+                                       value="" placeholder="Country" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" type="text" id="address"
+                                       name="address_line_1" value="" placeholder="Street Address" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="city" name="city"
+                                       value="" placeholder="City" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="postal" name="postal_code"
+                                       value="" placeholder="Postal Code" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="state" name="state"
+                                       value="" placeholder="State Code" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <span id="error" class="text-danger" style="display: none"></span>
+                            <div id="loader" style="display:none">
+                                <img src="{{ asset('images/loader.gif') }}">
+                            </div>
+                            <div id="servicesdiv" class="mb-35" style="display: none">
+
+
+                            </div>
+                        </div>
+
+
+                    </fieldset>
                 </form>
             </div>
             <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12">
@@ -385,6 +391,82 @@
 </section>
 @endsection
 @section('js')
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDvh8npnQNdrlU-Ct_gwwHAaMBBDsJQtag">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
+            integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        $("#searchTextField").keydown(function() {
+            // $('#fedex-checker').val(0);
+            // $('#accordion').slideUp();
+            // $('#addressdiv').slideUp();
+            // $('#desctax').slideUp();
+            // $('#othertaxli').slideUp();
+            // $('#cataxli').slideUp();
+            // $("#shippingdiv").slideUp();
+        })
+
+        function initialize() {
+            var input = document.getElementById('searchTextField');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                var place = autocomplete.getPlace();
+                console.log(place);
+                var searchAddressComponents = place.address_components,
+                    searchPostalCode = "",
+                    searchAddress = "",
+                    searchCity = "",
+                    searchState = "",
+                    searchCountryName = "",
+                    searchCountryCode = "";
+
+                $.each(searchAddressComponents, function() {
+                    if (this.types[0] == "postal_code") {
+                        searchPostalCode = this.short_name;
+                    }
+                    if (this.types[0] == "route") {
+                        searchAddress = this.short_name;
+                    }
+                    if (this.types[0] == "locality") {
+                        searchCity = this.short_name;
+                    }
+                    if (this.types[0] == "administrative_area_level_1") {
+                        searchState = this.short_name;
+                    }
+                    if (this.types[0] == "country") {
+                        searchCountryName = this.long_name;
+                        searchCountryCode = this.short_name;
+                    }
+                });
+
+                var addressArray = place.adr_address.split(',')
+
+                var country = searchCountryCode;
+                var city = searchCity;
+                var address = searchAddress;
+                var state = searchState;
+
+                var postalcode = searchPostalCode;
+                $('#country').val(searchCountryCode);
+                $('#country-code').val(searchCountryName);
+
+                // $('#country option[value="' + country.toString() + '"]').prop('selected', true);
+                $('#city').val(city);
+                $('#address').val(address);
+                $('#state').val(state);
+                $('#postal').val(postalcode);
+                $('#addressdiv').slideDown();
+                $('#fedex-checker').val(1);
+
+
+            });
+        }
+    </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
@@ -404,7 +486,7 @@
       $('.bttn').on('change', function() {
         var count = 0;
         if($(this).prop("checked") == true){
-          if($('#f-name').val()== "") {
+          if($('#first_name').val()== "") {
             $('.fname').text('first name is required field');
           } else {
             $('.fname').text("");
@@ -625,7 +707,14 @@
               number: $('#card_number').val(),
               exp_month: $('#expiration_month').val(),
               exp_year: $('#expiration_year').val(),
-              cvc: $('#cvv').val()
+              cvc: $('#cvv').val(),
+              first_name: $('#first_name').val(),
+              phone: $('#phone').val(),
+              address_line_1: $('#address').val(),
+              city: $('#city').val(),
+              state: $('#state').val(),
+              postal_code: $('#postal_code').val(),
+              country: $('#country').val(),
           },
           success: (data) => {
               let data2 = JSON.parse(data);
@@ -633,10 +722,11 @@
                   toastr.success(data2.message);
 
                   // setTimeout(() => {
+                      $('#track_id').val(data2.data.tracking_number);
                       $('#order-place').submit();
                   // }, 2000);
               } else {
-                  toastr.error('Payment failed.');
+                  toastr.error(data2.errors[0]);
                   return false;
               }
           },

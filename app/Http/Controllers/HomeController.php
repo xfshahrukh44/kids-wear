@@ -211,6 +211,25 @@ class HomeController extends Controller
             ]);
         }
 
+        $fedex_shipment_res = create_fedex_shipment([
+            'first_name' => $request->first_name,
+            'phone' => $request->phone,
+            'address_line_1' => $request->address_line_1,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'country' => $request->country,
+        ]);
+
+        if (!$fedex_shipment_res['status']) {
+            return json_encode([
+                'success' => false,
+                'data' => [],
+                'message' => 'Payment failed!',
+                'errors' => [$fedex_shipment_res['tracking_number']],
+            ]);
+        }
+
         $order_id = create_clover_order();
         if ($order_id) {
             $payment_res = create_clover_payment($order_id, $request->amount, $request->number, $request->exp_month, $request->exp_year, $request->cvc);
@@ -218,7 +237,9 @@ class HomeController extends Controller
             if ($payment_res) {
                 return json_encode([
                     'success' => true,
-                    'data' => [],
+                    'data' => [
+                        'tracking_number' => $fedex_shipment_res['tracking_number']
+                    ],
                     'message' => 'Payment successful!',
                     'errors' => [],
                 ]);

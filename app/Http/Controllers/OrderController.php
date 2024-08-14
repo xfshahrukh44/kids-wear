@@ -356,8 +356,9 @@ class OrderController extends Controller
 
 		$order = new orders();
 
+		$order->track_id = $request->track_id;
 		$order->delivery_country = $request->country;
-		$order->country_code = $request->country_code;
+		$order->country_code = $request->country;
 		$order->delivery_first_name = $request->first_name;
 		$order->delivery_last_name = $request->last_name;
 		$order->order_company = $request->company_name;
@@ -365,13 +366,13 @@ class OrderController extends Controller
 		$order->delivery_address_2 = $request->address_line_2;
 		$order->delivery_city = $request->city;
 		$order->delivery_state = $request->state;
-		$order->delivery_zip_code = $request->zip_code;
+		$order->delivery_zip_code = $request->postal_code;
 		$order->area = $request->area;
 		$order->landmark = $request->landmark;
 		$order->floor_num = $request->floor_num;
 		$order->building = $request->building;
 		$order->order_shipping = $cart['shipping'];
-		$order->country_code = $request->country_code;
+		$order->country_code = $request->country;
 
 		$order->order_email = $request->email;
 		$order->delivery_phone_no = $request->phone_no;
