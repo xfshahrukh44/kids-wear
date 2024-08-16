@@ -93,7 +93,16 @@ class HomeController extends Controller
                 return $q->orderBy('product_title', request()->get('title_order_by'));
             })
             ->when(request()->has('category_id') && request()->get('category_id') != null, function ($q) {
-                return $q->where('category', request()->get('category_id'));
+                return $q->where('category', request()->get('category_id'))
+                    ->orWhereHas('categorys', function ($q) {
+                        return $q->where('parent', request()->get('category_id'))
+                                ->orWhereHas('_parent', function ($q) {
+                                    return $q->where('parent', request()->get('category_id'))
+                                        ->orWhereHas('_parent', function ($q) {
+                                            return $q->where('parent', request()->get('category_id'));
+                                        });
+                                });
+                    });
             })
             ->paginate(18);
 

@@ -39,6 +39,9 @@
                                 'Women' => asset('images/section-2-slider-img-1.png'),
                                 'Kids' => asset('images/section-2-slider-img-3.png'),
                                 'Other' => asset('images/section-2-slider-img-4.png'),
+                                'Shoes' => url('images/20240814120439.webp'),
+                                'Gloves' => url('images/20240813113136.webp'),
+                                "Gown's and Dresses" => url('images/20240813053822.webp'),
                             ];
                         @endphp
                         @foreach (\App\Category::where('is_featured', 1)->get() as $category)
