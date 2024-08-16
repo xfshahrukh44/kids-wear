@@ -11,36 +11,42 @@
     <section class="inner-banner">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-2">
-                    <div class="product-detail-section-2-img">
-                        <div thumbsSlider="" class="swiper mySwiper">
-                            <div class="swiper-wrapper product-detail-section-2-img-main-1">
-                                <div class="swiper-slide loop_img">
-                                    <img src="{{asset($product->image)}}" class="img-fluid" />
-                                </div>
-                                @foreach($product_images as $product_image)
-                                    <div class="swiper-slide loop_img">
-                                        <img src="{{asset($product_image->image)}}" class="img-fluid" />
+                <div class="col-lg-7">
+                    <div class="main-info">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3">
+                            <div class="product-detail-section-2-img">
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper product-detail-section-2-img-main-1">
+                                        <div class="swiper-slide loop_img">
+                                            <img src="{{asset($product->image)}}" class="img-fluid" />
+                                        </div>
+                                        @foreach($product_images as $product_image)
+                                            <div class="swiper-slide loop_img">
+                                                <img src="{{asset($product_image->image)}}" class="img-fluid" />
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 p-0">
-                    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="{{asset($product->image)}}" class="img-fluid" />
-                            </div>
-                            @foreach($product_images as $product_image)
-                                <div class="swiper-slide">
-                                    <img src="{{asset($product_image->image)}}" class="img-fluid" />
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-lg-9 p-0">
+                            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="{{asset($product->image)}}" class="img-fluid" />
+                                    </div>
+                                    @foreach($product_images as $product_image)
+                                        <div class="swiper-slide">
+                                            <img src="{{asset($product_image->image)}}" class="img-fluid" />
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
 
+                        </div>
+                </div>
+                    </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="product-detail-section-2-text">
@@ -174,17 +180,6 @@
 
 
 
-.inner-banner .product-detail-section-2-text {
-    position: relative;
-    top: -80px;
-    overflow-y: scroll;
-    height: 500px;
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    justify-content: center;
-}
-
 
 .mySwiper2 .swiper-slide img {
     height: 300px !important;
@@ -194,10 +189,9 @@
 
 
 .inner-banner .product-detail-section-2-img .loop_img img {
-    width: 60px !important;
-    height: 60px !important;
+    width: 100px !important;
+    height: 100px !important;
 }
-
 
 </style>
 

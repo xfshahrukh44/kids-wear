@@ -429,7 +429,7 @@ section.product-detail-section-2 {
     z-index: 0;
     padding-top: 7rem;
     /* padding-bottom: 5rem; */
-    /* margin-bottom: 4rem; */
+    margin-bottom: 5rem;
     /* height: 600px; */
     padding-bottom: 2rem;
 }
@@ -473,8 +473,9 @@ section.product-detail-section-2 {
 }
 
 .inner-banner .heading-4 {
-    font-size: 38px;
+    font-size: 25px;
     line-height: normal;
+    text-transform: capitalize;
 }
 
 .inner-banner .para-1 {
@@ -510,17 +511,14 @@ header .container {
     position: relative;
     top: 0px !important;
     overflow-y: auto;
-    height: 500px;
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    justify-content: start;
+    height: 200px;
+    margin-top: 70px;
 }
 
 
 .mySwiper2 .swiper-slide img {
-    height: 300px !important;
-    width: 300px !important;
+    height: 450px !important;
+    width: 450px !important;
 }
 
 
@@ -531,7 +529,9 @@ header .container {
 }
 
 
-
+.main-info {
+    margin-bottom: -150px;
+}
 
 
 .product-detail-section-2-text::-webkit-scrollbar {
