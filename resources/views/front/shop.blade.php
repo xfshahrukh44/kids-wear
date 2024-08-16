@@ -19,6 +19,11 @@
         a.page-link {
             color: #b1e76f !important;
         }
+        .section-3-main-img img {
+            height: 400px !important;
+            object-fit: cover !important;
+            width: 400px !important;
+        }
     </style>
 @endsection
 

@@ -170,7 +170,6 @@
 @endsection
 
 @section('css')
-<!--<link rel="stylesheet" href="{{asset('css/inner-01.css')}}">-->
 <style>
 
 
@@ -180,6 +179,10 @@
     top: -80px;
     overflow-y: scroll;
     height: 500px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
@@ -195,7 +198,9 @@
     height: 60px !important;
 }
 
+
 </style>
+
 @endsection
 
 @section('js')
