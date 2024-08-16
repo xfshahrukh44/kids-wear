@@ -350,7 +350,7 @@
     <title>kids Wear | @yield('title')</title>
     <link rel="icon" href="">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/inner-01.css') }}">
+    <link rel="stylesheet" href="{{ url('css/inner-01.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 

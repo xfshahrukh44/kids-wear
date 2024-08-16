@@ -519,7 +519,7 @@ header .container {
 .mySwiper2 .swiper-slide img {
     height: 450px !important;
     width: 450px !important;
-    border: 1px solid #212529;
+    border: 1px solid #212529 !important;
 }
 
 
@@ -527,7 +527,7 @@ header .container {
 .product-detail-section-2-img .loop_img img {
     width: 60px !important;
     height: 60px !important;
-    border: 1px solid #212529;
+    border: 1px solid #212529 !important;
 }
 
 
