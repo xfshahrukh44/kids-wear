@@ -34,9 +34,11 @@ class CategoryController extends Controller
 
             if (!empty($keyword)) {
                 $category = Category::where('name', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
+//                ->paginate($perPage);
+                ->get();
             } else {
-                $category = Category::paginate($perPage);
+//                $category = Category::paginate($perPage);
+                $category = Category::get();
             }
 
             return view('admin.category.index', compact('category'));
