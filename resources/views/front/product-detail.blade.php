@@ -4,7 +4,7 @@
 @section('content')
     <!-- section-1 -->
     @php
-        $product_images = \Illuminate\Support\Facades\DB::table('product_imagess')->where('product_id', $product->id)->get();
+       $product_images = \Illuminate\Support\Facades\DB::table('product_imagess')->where('product_id', $product->id)->take(3)->get();
         $product_colors = $product->attributes->where('attribute_id', 11)->pluck('value')->toArray() ?? [];
         $product_sizes = $product->attributes->where('attribute_id', 12)->pluck('value')->toArray() ?? [];
     @endphp
@@ -15,11 +15,11 @@
                     <div class="product-detail-section-2-img">
                         <div thumbsSlider="" class="swiper mySwiper">
                             <div class="swiper-wrapper product-detail-section-2-img-main-1">
-                                <div class="swiper-slide">
+                                <div class="swiper-slide loop_img">
                                     <img src="{{asset($product->image)}}" class="img-fluid" />
                                 </div>
                                 @foreach($product_images as $product_image)
-                                    <div class="swiper-slide">
+                                    <div class="swiper-slide loop_img">
                                         <img src="{{asset($product_image->image)}}" class="img-fluid" />
                                     </div>
                                 @endforeach
@@ -46,7 +46,7 @@
                     <div class="product-detail-section-2-text">
                         <h4 class="heading-4">{{$product->product_title}}</h4>
                         <small style="font-size: 20px;" class="heading-4">${{$product->price}}</small>
-                        {!! $product->description !!}
+                       {!! str_replace("<p>&nbsp;</p>", "", $product->description) !!}
                     </div>
                 </div>
             </div>
@@ -170,8 +170,30 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('css/inner-01.css')}}">
+<!--<link rel="stylesheet" href="{{asset('css/inner-01.css')}}">-->
 <style>
+
+
+
+.inner-banner .product-detail-section-2-text {
+    position: relative;
+    top: -80px;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+
+.mySwiper2 .swiper-slide img {
+    height: 300px !important;
+    width: 300px !important;
+}
+
+
+
+.inner-banner .product-detail-section-2-img .loop_img img {
+    width: 60px !important;
+    height: 60px !important;
+}
 
 </style>
 @endsection
