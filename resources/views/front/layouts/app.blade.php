@@ -386,12 +386,6 @@
 </head>
 
 <body>
-    @if(env('APP_LOADER') != false)
-        <div class="loadermain">
-            <img src="{{ asset('images/logo.gif') }}" class="img-fluid" alt="">
-        </div>
-    @endif
-
     <div id="butter">
         <div class="section-green-color"></div>
         <!-- header -->
@@ -402,7 +396,7 @@
                         <div class="main-header">
                             <nav class="navbar navbar-expand-lg navbar-light">
                                 <a class="navbar-brand logo" href="{{ route('home') }}"><img
-                                        src="{{ asset('images/logo.png') }}" class="img-fluid" alt=""></a>
+                                        src="{{ asset('images/logo-4.gif') }}" class="img-fluid" alt=""></a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                     aria-expanded="false" aria-label="Toggle navigation">
@@ -639,9 +633,22 @@
     <script src="{{ asset('js/butter.js') }}"></script>
     <script>
         $(document).ready(function () {
-            setTimeout(function () {
-                $('.loadermain').fadeOut()
-            }, 6000)
+            // Check if this is the first visit
+            if (!localStorage.getItem('hasVisited')) {
+                // User is visiting for the first time
+                $('.loadermain').show();
+
+                // Run the loader for 6 seconds
+                setTimeout(function () {
+                    $('.loadermain').fadeOut();
+                }, 6000);
+
+                // Set the flag in localStorage to indicate the user has visited
+                localStorage.setItem('hasVisited', 'true');
+            } else {
+                // Hide the loader if the user has visited before
+                $('.loadermain').hide();
+            }
         });
 
         // set options when initializing butter.js

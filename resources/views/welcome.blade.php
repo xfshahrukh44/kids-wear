@@ -2,6 +2,12 @@
 @section('title', 'Home')
 
 @section('content')
+    @if(env('APP_LOADER') != false)
+        <div class="loadermain">
+            <img src="{{ asset('images/logo.gif') }}" class="img-fluid" alt="">
+        </div>
+    @endif
+
     <!-- section-1 -->
     <section class="section-1">
         <div class="container">
