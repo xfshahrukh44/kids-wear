@@ -537,13 +537,12 @@ header .container {
 
 
 .product-detail-section-2-text::-webkit-scrollbar {
-    width: 2px !important;
+    width: 4px !important;
 }
 
 
 .product-detail-section-2-text::-webkit-scrollbar-track {
     background: var(--green-color);
-
 }
 
 .product-detail-section-2-text::-webkit-scrollbar-thumb {

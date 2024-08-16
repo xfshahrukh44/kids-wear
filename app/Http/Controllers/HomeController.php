@@ -78,7 +78,21 @@ class HomeController extends Controller
                         ->orWhere('description', 'LIKE', '%' . request()->get('search') . '%');
                 });
             })
-            ->when(request()->has('category_id'), function ($q) {
+            ->when(request()->has('age_by') && request()->get('age_by') != "", function ($q) {
+                return $q->whereHas('attributes', function ($q) {
+                    return $q->where([
+                        'attribute_id' => 12,
+                        'value' => request()->get('age_by'),
+                    ]);
+                });
+            })
+            ->when(request()->has('order_by') && request()->get('order_by') != "", function ($q) {
+                return $q->orderBy('price', request()->get('order_by'));
+            })
+            ->when(request()->has('title_order_by') && request()->get('title_order_by') != "", function ($q) {
+                return $q->orderBy('product_title', request()->get('title_order_by'));
+            })
+            ->when(request()->has('category_id') && request()->get('category_id') != null, function ($q) {
                 return $q->where('category', request()->get('category_id'));
             })
             ->paginate(18);

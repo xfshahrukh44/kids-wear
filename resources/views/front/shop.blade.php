@@ -58,12 +58,42 @@
                         <p class="para-1">Filter By:</p>
                         <form method="GET" action="{{route('front.shop')}}">
                             <div class="form-row">
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-2">
                                     <input type="text" placeholder="Search product" name="search" value="{{request()->get('search')}}">
                                 </div>
                                 <div class="form-group col-md-2">
+                                    <select id="inputState" class="form-control" name="age_by">
+                                        <option value="">Age by</option>
+                                        <option value="1" {!! (request()->get('age_by') == '1') ? 'selected' : '' !!}>1</option>
+                                        <option value="2" {!! (request()->get('age_by') == '2') ? 'selected' : '' !!}>2</option>
+                                        <option value="3" {!! (request()->get('age_by') == '3') ? 'selected' : '' !!}>3</option>
+                                        <option value="4" {!! (request()->get('age_by') == '4') ? 'selected' : '' !!}>4</option>
+                                        <option value="5" {!! (request()->get('age_by') == '5') ? 'selected' : '' !!}>5</option>
+                                        <option value="6" {!! (request()->get('age_by') == '6') ? 'selected' : '' !!}>6</option>
+                                        <option value="7" {!! (request()->get('age_by') == '7') ? 'selected' : '' !!}>7</option>
+                                        <option value="8" {!! (request()->get('age_by') == '8') ? 'selected' : '' !!}>8</option>
+                                        <option value="9" {!! (request()->get('age_by') == '9') ? 'selected' : '' !!}>9</option>
+                                        <option value="10" {!! (request()->get('age_by') == '10') ? 'selected' : '' !!}>10</option>
+                                        <option value="11" {!! (request()->get('age_by') == '11') ? 'selected' : '' !!}>11</option>
+                                        <option value="12" {!! (request()->get('age_by') == '12') ? 'selected' : '' !!}>12</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select id="inputState" class="form-control" name="order_by">
+                                        <option value="">Price</option>
+                                        <option value="ASC" {!! (request()->get('order_by') == 'ASC') ? 'selected' : '' !!}>Lowest to highest</option>
+                                        <option value="DESC" {!! (request()->get('order_by') == 'DESC') ? 'selected' : '' !!}>Highest to lowest</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select id="inputState" class="form-control" name="title_order_by">
+                                        <option value="ASC" {!! (request()->get('title_order_by') == 'ASC') ? 'selected' : '' !!}>A - Z</option>
+                                        <option value="DESC" {!! (request()->get('title_order_by') == 'DESC') ? 'selected' : '' !!}>Z - A</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
                                     <select id="inputState" class="form-control" name="category_id">
-                                        <option>Select category</option>
+                                        <option value="">Select category</option>
                                         @foreach(\App\Category::all() as $category)
                                             <option value="{{$category->id}}" {!! request()->get('category_id') == $category->id ? 'selected' : '' !!}>{{$category->name}}</option>
                                         @endforeach
@@ -109,7 +139,7 @@
                     </div>
                 @endforeach
             </div>
-            {{$products->links()}}
+            {{$products->withQueryString()->links()}}
         </div>
     </section>
     <!-- section-3 -->
