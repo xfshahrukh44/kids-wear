@@ -48,6 +48,7 @@
                                 'Shoes' => asset('images/20240814120439.webp'),
                                 'Gloves' => asset('images/20240813113136.webp'),
                                 "Gown's and Dresses" => url('images/20240813053822.webp'),
+                                "Short Pants & Casual Outfit" => url('images/20240813120007.webp'),
                             ];
                         @endphp
                         @foreach (\App\Category::where('is_featured', 1)->get() as $category)
