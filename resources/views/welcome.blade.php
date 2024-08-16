@@ -51,7 +51,7 @@
                                 "Short Pants & Casual Outfit" => url('images/20240813120007.webp'),
                             ];
                         @endphp
-                        @foreach (\App\Category::where('is_featured', 1)->get() as $category)
+                        @foreach (\App\Category::where('is_featured', 1)->orderBy('name', 'ASC')->get() as $category)
                             <div class="item" data-aos="fade-right" data-aos-duration="500">
                                 <a href="{{ route('front.shop', ['category_id' => $category->id]) }}">
                                     <div class="section-2-slider-main">
