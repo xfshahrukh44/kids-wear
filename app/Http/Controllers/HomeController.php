@@ -73,8 +73,10 @@ class HomeController extends Controller
     {
         $products = Product::
             when(request()->has('search') && request()->get('search') != "", function ($q) {
-                return $q->where('product_title', 'LIKE', '%' . request()->get('search') . '%')
-                    ->orWhere('description', 'LIKE', '%' . request()->get('search') . '%');
+                return $q->where(function ($q) {
+                    return $q->where('product_title', 'LIKE', '%' . request()->get('search') . '%')
+                        ->orWhere('description', 'LIKE', '%' . request()->get('search') . '%');
+                });
             })
             ->when(request()->has('category_id'), function ($q) {
                 return $q->where('category', request()->get('category_id'));
