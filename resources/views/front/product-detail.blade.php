@@ -73,7 +73,7 @@
 
                                 <div class="form-row">
                                     @if(count($product_colors))
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col">
                                             <!-- <label for="">Size:</label> -->
                                             <select id="inputState" class="form-control select-form-3" name="color" required>
                                                 <option value="">Select Color</option>
@@ -84,7 +84,7 @@
                                         </div>
                                     @endif
                                     @if(count($product_sizes))
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col">
                                             <!-- <label for="">Size:</label> -->
                                             <select id="inputState" class="form-control select-form-3" name="size" required>
                                                 <option value="">Select size</option>
@@ -94,7 +94,7 @@
                                             </select>
                                         </div>
                                     @endif
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col">
                                         <!-- <label for="">Quantity:</label> -->
                                         <select id="inputState" class="form-control select-form-4 classic" name="qty" required>
                                             <option value="1" selected>Quantity: 1</option>
@@ -105,7 +105,10 @@
                                             <option value="6">6</option>
                                         </select>
                                     </div>
-                                    <div class="product-detail-section-2-text-anker form-group col-md-3">
+                                </div>
+                                <div class="form-row mt-4">
+                                    <div class="col-md-4"></div>
+                                    <div class="product-detail-section-2-text-anker form-group col-md-4">
                                         <button href="javascript:;" class="btn custome-btn" type="submit">Add to cart</button>
                                     </div>
                                 </div>

@@ -153,64 +153,64 @@
     </section>
     <!-- section-4 -->
 
-    <!-- section-5 -->
-    <section class="section-5 py">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-3-text text-center" data-aos="fade-down" data-aos-duration="500">
-                        <h2 class="heading-2 white-color"><span class="d-block">{!! $page->sections[12]->value !!}</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row secton-3-main p-0">
-                @php
-                    $products = \App\Product::where('is_best_selling', 1)->take(3)->get();
-                @endphp
+{{--    <!-- section-5 -->--}}
+{{--    <section class="section-5 py">--}}
+{{--        <div class="container-fluid">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <div class="section-3-text text-center" data-aos="fade-down" data-aos-duration="500">--}}
+{{--                        <h2 class="heading-2 white-color"><span class="d-block">{!! $page->sections[12]->value !!}</h2>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row secton-3-main p-0">--}}
+{{--                @php--}}
+{{--                    $products = \App\Product::where('is_best_selling', 1)->take(3)->get();--}}
+{{--                @endphp--}}
 
-                @foreach ($products as $product)
-                    <div class="col-lg-4" data-aos="fade-down-right" data-aos-duration="500">
-                        <a href="{{ route('front.productDetail', $product->id) }}">
-                            <div class="section-3-main-box">
-                                <div class="section-3-main-box-img">
-                                    <div class="slide-1 owl-carousel owl-theme">
-                                        <div class="item">
-                                            <div class="section-3-main-img">
-                                                <figure><img src="{{ asset($product->image) }}" alt=""
-                                                        class="img-fluid"></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-3-main-box-text">
-                                    <div class="section-3-main-box-text1">
-                                        {{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover --}}
-                                        {{--                                        1J311</p> --}}
-                                        <p class="para-1 white-color">
-                                            {{ $product->product_title }}
-                                        </p>
-                                        <strong class="white-color">${{ $product->price }}</strong>
-                                    </div>
-                                    <div class="section-3-main-box-text2">
-                                        {{--                                    <ul class="main-box"> --}}
-                                        {{--                                        <li><span class="main-color-box red-box"></span></li> --}}
-                                        {{--                                        <li><span class="main-color-box white-box"></span></li> --}}
-                                        {{--                                        <li><span class="main-color-box yellow-box"></span></li> --}}
-                                        {{--                                    </ul> --}}
-                                        {{--                                        <ul class="main-icon"> --}}
-                                        {{--                                            <li><i class="far fa-heart red-icon"></i></li> --}}
-                                        {{--                                            <li><i class="fas fa-lock black-icon"></i></li> --}}
-                                        {{--                                        </ul> --}}
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- section-5 -->
+{{--                @foreach ($products as $product)--}}
+{{--                    <div class="col-lg-4" data-aos="fade-down-right" data-aos-duration="500">--}}
+{{--                        <a href="{{ route('front.productDetail', $product->id) }}">--}}
+{{--                            <div class="section-3-main-box">--}}
+{{--                                <div class="section-3-main-box-img">--}}
+{{--                                    <div class="slide-1 owl-carousel owl-theme">--}}
+{{--                                        <div class="item">--}}
+{{--                                            <div class="section-3-main-img">--}}
+{{--                                                <figure><img src="{{ asset($product->image) }}" alt=""--}}
+{{--                                                        class="img-fluid"></figure>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="section-3-main-box-text">--}}
+{{--                                    <div class="section-3-main-box-text1">--}}
+{{--                                        --}}{{--                                    <p class="para-1 white-color">Quarter zip <span class="d-block"></span>pullover --}}
+{{--                                        --}}{{--                                        1J311</p> --}}
+{{--                                        <p class="para-1 white-color">--}}
+{{--                                            {{ $product->product_title }}--}}
+{{--                                        </p>--}}
+{{--                                        <strong class="white-color">${{ $product->price }}</strong>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="section-3-main-box-text2">--}}
+{{--                                        --}}{{--                                    <ul class="main-box"> --}}
+{{--                                        --}}{{--                                        <li><span class="main-color-box red-box"></span></li> --}}
+{{--                                        --}}{{--                                        <li><span class="main-color-box white-box"></span></li> --}}
+{{--                                        --}}{{--                                        <li><span class="main-color-box yellow-box"></span></li> --}}
+{{--                                        --}}{{--                                    </ul> --}}
+{{--                                        --}}{{--                                        <ul class="main-icon"> --}}
+{{--                                        --}}{{--                                            <li><i class="far fa-heart red-icon"></i></li> --}}
+{{--                                        --}}{{--                                            <li><i class="fas fa-lock black-icon"></i></li> --}}
+{{--                                        --}}{{--                                        </ul> --}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
+{{--    <!-- section-5 -->--}}
 
     <!-- section-6 -->
     <section class="section-6 py">

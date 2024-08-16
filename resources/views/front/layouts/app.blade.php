@@ -350,7 +350,7 @@
     <title>kids Wear | @yield('title')</title>
     <link rel="icon" href="">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/inner-01.css') }}">
+    <link rel="stylesheet" href="{{ url('css/inner-01.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
@@ -412,7 +412,7 @@
                                                                             <div class="sub_menu_rtl">
                                                                                 <ul>
                                                                                     <li style="list-style: none;">
-                                                                                        <a href="{{route('front.shop', ['category_id' => $sub_category->id])}}">
+                                                                                        <a href="#">
                                                                                             <h5>{{$sub_category->name}}</h5>
                                                                                         </a>
                                                                                     </li>
