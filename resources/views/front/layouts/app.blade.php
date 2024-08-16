@@ -365,11 +365,32 @@
             src: url('{{ 'fonts/fonnts.com-Juniory.ttf' }}');
             /* src: url(../font/fonnts.com-Juniory.ttf); */
         }
+
+        .loadermain {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            background-color: #ffffff;
+            z-index: 999999;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 
 </head>
 
 <body>
+    @if(env('APP_LOADER') != false)
+        <div class="loadermain">
+            <img src="{{ asset('images/logo.gif') }}" class="img-fluid" alt="">
+        </div>
+    @endif
 
     <div id="butter">
         <div class="section-green-color"></div>
@@ -612,9 +633,17 @@
     </script>
 
 
+
+
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/butter.js') }}"></script>
     <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('.loadermain').fadeOut()
+            }, 6000)
+        });
+
         // set options when initializing butter.js
         var options = {
             wrapperId: 'customDefaultId',
