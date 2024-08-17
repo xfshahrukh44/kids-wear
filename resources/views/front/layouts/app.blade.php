@@ -548,11 +548,10 @@
                             <div class="footer-text">
                                 <h6 class="heading-6 white-color">Company</h6>
                                 <ul>
-                                    <li><a href="{{ route('front.shop', ['category_id' => 3]) }}">Women</a></li>
-                                    {{--                                    <li><a href="javascript:;"></a></li> --}}
-                                    <li><a href="{{ route('front.shop', ['category_id' => 2]) }}"> Men</a></li>
-                                    <li><a href="{{ route('front.shop', ['category_id' => 4]) }}"> Kids</a></li>
-                                    {{--                                    <li><a href="javascript:;">Gift Card</a></li> --}}
+                                    <li><a href="{{ route('front.shop', ['category_id' => 35]) }}">Gown's and Dresses</a></li>
+                                    <li><a href="{{ route('front.shop', ['category_id' => 136]) }}"> Shoes</a></li>
+                                    <li><a href="{{ route('front.shop', ['category_id' => 62]) }}"> Short Pants & Casual Outfit</a></li>
+                                    <li><a href="{{ route('front.shop', ['category_id' => 5]) }}"> Other</a></li>
                                 </ul>
                             </div>
                         </div>
