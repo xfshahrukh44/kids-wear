@@ -112,7 +112,10 @@ class HomeController extends Controller
     public function productDetail(Request $request, $id)
     {
         $product = Product::find($id);
-        $featured_products = Product::take(3)->get();
+        $featured_products = Product::where('id', '!=', $id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
 
         return view('front.product-detail', compact('product', 'featured_products'));
     }
