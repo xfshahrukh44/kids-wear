@@ -136,26 +136,29 @@
     <!-- section-3 -->
 
     <!-- section-4 -->
+    @php
+        $static_product = \App\Product::find(97);
+    @endphp
     <section class="section-4 py">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="500">
                     <div class="section-4-text">
                         <div class="section-4-text-main">
-                            <span class="green">$ 59.99</span>
-                            <span class="silver"><i class="fas fa-heart"></i> 234</span>
+                            <span class="green">$ {{$static_product->price}}</span>
+{{--                            <span class="silver"><i class="fas fa-heart"></i> 234</span>--}}
                         </div>
-                        <h3 class="heading-3">{!! $page->sections[9]->value !!}</h3>
-                        <p class="para-1">{!! $page->sections[10]->value !!}</p>
+                        <h3 class="heading-3">{!! $static_product->product_title !!}</h3>
+{{--                        <p class="para-1">{!! $page->sections[10]->value !!}</p>--}}
                         <div class="section-4-text-anker section-4-text-main">
-                            <a href="{{ route('front.shop') }}" class="btn custome-btn green-btn mr-1">Shop Now</a>
+                            <a href="{{ route('front.productDetail', $static_product->id) }}" class="btn custome-btn green-btn mr-1">Shop Now</a>
                             <span class="silver"><i class="fas fa-shopping-bag"></i> Add to Cart</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-duration="500">
                     <div class="section-4-img">
-                        <img src="{!! $page->sections[11]->value !!}" alt="" class="img-fluid">
+                        <img src="{!! asset($static_product->image) !!}" alt="" class="img-fluid">
                     </div>
                 </div>
             </div>
