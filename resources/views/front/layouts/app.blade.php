@@ -309,13 +309,14 @@
             padding-top: 15px;
             padding-bottom: 10px;
         }
+
         .sub_menu_rtl li a {
             font-size: 14px;
         }
 
         /* 8/5/2024 new css */
 
-        @media only screen and (max-width: 1200px){
+        @media only screen and (max-width: 1200px) {
             ul.dropdown-menu {
                 max-width: 700px;
             }
@@ -413,28 +414,35 @@
 
                                             <ul class="dropdown-menu slideInUp" aria-labelledby="navbarDropdown">
                                                 @php
-                                                    $main_categories = \App\Category::where('parent', 0)->whereHas('children')->orderBy('name', 'ASC')->get();
+                                                    $main_categories = \App\Category::where('parent', 0)
+                                                        ->whereHas('children')
+                                                        ->orderBy('name', 'ASC')
+                                                        ->get();
                                                 @endphp
 
-                                                @foreach($main_categories as $main_category)
+                                                @foreach ($main_categories as $main_category)
                                                     <li class="dropdown-submenu">
-                                                        <a href="{{route('front.shop', ['category_id' => $main_category->id])}}">{{$main_category->name}} <i class="fas fa-angle-right"></i></a>
-                                                        @if(count($main_category->children))
+                                                        <a
+                                                            href="{{ route('front.shop', ['category_id' => $main_category->id]) }}">{{ $main_category->name }}
+                                                            <i class="fas fa-angle-right"></i></a>
+                                                        @if (count($main_category->children))
                                                             <ul class="dropdown-menu">
                                                                 <div class="row">
-                                                                    @foreach($main_category->children as $sub_category)
+                                                                    @foreach ($main_category->children as $sub_category)
                                                                         <div class="col-3">
                                                                             <div class="sub_menu_rtl">
                                                                                 <ul>
                                                                                     <li style="list-style: none;">
                                                                                         <a href="#">
-                                                                                            <h5>{{$sub_category->name}}</h5>
+                                                                                            <h5>{{ $sub_category->name }}
+                                                                                            </h5>
                                                                                         </a>
                                                                                     </li>
-                                                                                    @if(count($sub_category->children))
-                                                                                        @foreach($sub_category->children as $child_category)
+                                                                                    @if (count($sub_category->children))
+                                                                                        @foreach ($sub_category->children as $child_category)
                                                                                             <li>
-                                                                                                <a href="{{route('front.shop', ['category_id' => $child_category->id])}}">{{$child_category->name}}</a>
+                                                                                                <a
+                                                                                                    href="{{ route('front.shop', ['category_id' => $child_category->id]) }}">{{ $child_category->name }}</a>
                                                                                             </li>
                                                                                         @endforeach
                                                                                     @endif
@@ -548,9 +556,11 @@
                             <div class="footer-text">
                                 <h6 class="heading-6 white-color">Company</h6>
                                 <ul>
-                                    <li><a href="{{ route('front.shop', ['category_id' => 35]) }}">Gown's and Dresses</a></li>
+                                    <li><a href="{{ route('front.shop', ['category_id' => 35]) }}">Gown's and
+                                            Dresses</a></li>
                                     <li><a href="{{ route('front.shop', ['category_id' => 136]) }}"> Shoes</a></li>
-                                    <li><a href="{{ route('front.shop', ['category_id' => 62]) }}"> Short Pants & Casual Outfit</a></li>
+                                    <li><a href="{{ route('front.shop', ['category_id' => 62]) }}"> Short Pants &
+                                            Casual Outfit</a></li>
                                     <li><a href="{{ route('front.shop', ['category_id' => 5]) }}"> Other</a></li>
                                 </ul>
                             </div>
@@ -631,14 +641,14 @@
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/butter.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Check if this is the first visit
             if (!localStorage.getItem('hasVisited')) {
                 // User is visiting for the first time
                 $('.loadermain').show();
 
                 // Run the loader for 6 seconds
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.loadermain').fadeOut();
                 }, 6000);
 

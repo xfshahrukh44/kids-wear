@@ -38,18 +38,18 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-          $logo = imagetable::
-               select('img_path')
-               ->where('table_name','=','logo')
-               ->first();
-       
-          $favicon = imagetable::
-                           select('img_path')
-                           ->where('table_name','=','favicon')
-                           ->first();  
+        $logo = imagetable::
+            select('img_path')
+            ->where('table_name', '=', 'logo')
+            ->first();
 
-        View()->share('logo',$logo);
-        View()->share('favicon',$favicon);
+        $favicon = imagetable::
+            select('img_path')
+            ->where('table_name', '=', 'favicon')
+            ->first();
+
+        View()->share('logo', $logo);
+        View()->share('favicon', $favicon);
     }
 
     public function authenticated(Request $request, $user)
@@ -58,17 +58,17 @@ class LoginController extends Controller
             ->performedOn($user)
             ->causedBy($user)
             ->log('LoggedIn');
-        
-          if(auth()->user()->isAdmin() == true) {
-               return redirect('admin/dashboard');
-          } else {
 
-                Session::flash('message', 'You have logged In  Successfully'); 
-                Session::flash('alert-class', 'alert-success'); 
-               return redirect('account');
-          }     
-            
-         
+        if (auth()->user()->isAdmin() == true) {
+            return redirect('admin/dashboard');
+        } else {
+
+            Session::flash('message', 'You have logged In  Successfully');
+            Session::flash('alert-class', 'alert-success');
+            return redirect('account');
+        }
+
+
     }
 
     public function logout(Request $request)
@@ -83,5 +83,5 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
-    
+
 }

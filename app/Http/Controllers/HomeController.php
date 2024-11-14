@@ -22,6 +22,7 @@ use Auth;
 use App\Profile;
 use App\Page;
 use Image;
+use Symfony\Component\Mime\Part\HtmlPart;
 
 class HomeController extends Controller
 {
@@ -96,12 +97,12 @@ class HomeController extends Controller
                 return $q->where('category', request()->get('category_id'))
                     ->orWhereHas('categorys', function ($q) {
                         return $q->where('parent', request()->get('category_id'))
-                                ->orWhereHas('_parent', function ($q) {
-                                    return $q->where('parent', request()->get('category_id'))
-                                        ->orWhereHas('_parent', function ($q) {
-                                            return $q->where('parent', request()->get('category_id'));
-                                        });
-                                });
+                            ->orWhereHas('_parent', function ($q) {
+                                return $q->where('parent', request()->get('category_id'))
+                                    ->orWhereHas('_parent', function ($q) {
+                                        return $q->where('parent', request()->get('category_id'));
+                                    });
+                            });
                     });
             })
             ->paginate(18);
@@ -141,9 +142,10 @@ class HomeController extends Controller
 
     public function careerSubmit(Request $request)
     {
+        // Store the inquiry data
         inquiry::create($request->all());
 
-        // Send the email
+        // Prepare email data
         $data = [
             'fname' => $request->fname,
             'email' => $request->email,
@@ -151,24 +153,20 @@ class HomeController extends Controller
         ];
 
         try {
-            Mail::send([], [], function ($message) use ($data) {
+            // Send the email using a Blade view
+            Mail::send('emails.inquiry', $data, function ($message) use ($data) {
                 $message->to($data['email'])
-                    ->subject('New Inquiry Submission')
-                    ->setBody(
-                        '<p>Name: ' . $data['fname'] . '</p>' .
-                        '<p>Email: ' . $data['email'] . '</p>' .
-                        '<p>Notes: ' . $data['notes'] . '</p>',
-                        'text/html'
-                    );
+                    ->subject('New Inquiry Submission');
             });
         } catch (\Exception $e) {
+            // Log the error in case of failure
             Log::error('MAIL FAILED: ' . $e->getMessage());
         }
 
+        // Return a response to the user
         return redirect()->back()->with('success', 'Thank you for contacting us. We will get back to you asap');
-        //        return response()->json(['message'=>'Thank you for contacting us. We will get back to you asap', 'status' => true]);
-//        return back();
     }
+
 
     public function newsletterSubmit(Request $request)
     {
@@ -220,7 +218,7 @@ class HomeController extends Controller
         return view('contact', compact('page'));
     }
 
-    public function initiateCloverPayment (Request $request)
+    public function initiateCloverPayment(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
