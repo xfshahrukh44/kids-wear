@@ -22,7 +22,7 @@ class ProcessController extends Controller
     public function getGenerator()
     {
         $roles = Role::all();
-        return view('laravel-admin::generator',compact('roles'));
+        return view('laravel-admin::generator', compact('roles'));
     }
 
     /**
@@ -33,8 +33,8 @@ class ProcessController extends Controller
     public function postGenerator(Request $request)
     {
 
-        $this->validate($request,[
-            'crud_name'  => 'required',
+        $this->validate($request, [
+            'crud_name' => 'required',
             'menu_icon' => 'required',
             'fields' => 'required',
         ]);
@@ -88,10 +88,10 @@ class ProcessController extends Controller
         }
 
         if ($request->has('form_helper')) {
-            if($request->form_helper == null || $request->form_helper == ""){
+            if ($request->form_helper == null || $request->form_helper == "") {
                 $commandArg['--form-helper'] = 'html';
 
-            }else{
+            } else {
                 $commandArg['--form-helper'] = $request->form_helper;
             }
         }
@@ -111,7 +111,7 @@ class ProcessController extends Controller
             $icon = $request->menu_icon;
 
 
-            $menus->menus = array_map(function ($menu) use ($name, $routeName,$icon) {
+            $menus->menus = array_map(function ($menu) use ($name, $routeName, $icon) {
                 if ($menu->section == 'Modules') {
                     array_push($menu->items, (object) [
                         'title' => $name,
@@ -128,33 +128,37 @@ class ProcessController extends Controller
             Artisan::call('migrate');
 
             //Permission given to Admin
-            $name = str_slug($name,'-');
-           $admins =  User::has('roles')->where('name','=','admin')->get();
+            $name = str_slug($name, '-');
+            $admins = User::has('roles')->where('name', '=', 'admin')->get();
             $add_permission = \App\Permission::firstOrCreate(
-                ['name' => 'add-'.$name]);
+                ['name' => 'add-' . $name]
+            );
             $edit_permission = \App\Permission::firstOrCreate(
-                ['name' => 'edit-'.$name]);
-            $view_permission =\App\Permission::firstOrCreate(
-                ['name' => 'view-'.$name]);
+                ['name' => 'edit-' . $name]
+            );
+            $view_permission = \App\Permission::firstOrCreate(
+                ['name' => 'view-' . $name]
+            );
             $delete_permission = \App\Permission::firstOrCreate(
-                ['name' => 'delete-'.$name]);
+                ['name' => 'delete-' . $name]
+            );
 
             foreach ($admins as $admin) {
-                $role = $admin->roles()->where('name','=','admin')->first();
+                $role = $admin->roles()->where('name', '=', 'admin')->first();
 
-                if(!$admin->hasPermission($add_permission)){
+                if (!$admin->hasPermission($add_permission)) {
                     $role->givePermissionTo($add_permission);
                 }
 
-                if(!$admin->hasPermission($edit_permission)){
+                if (!$admin->hasPermission($edit_permission)) {
                     $role->givePermissionTo($edit_permission);
                 }
 
-                if(!$admin->hasPermission($view_permission)){
+                if (!$admin->hasPermission($view_permission)) {
                     $role->givePermissionTo($view_permission);
                 }
 
-                if(!$admin->hasPermission($delete_permission)){
+                if (!$admin->hasPermission($delete_permission)) {
                     $role->givePermissionTo($delete_permission);
                 }
             }
@@ -163,7 +167,7 @@ class ProcessController extends Controller
             return Response::make($e->getMessage(), 500);
         }
 
-        Session::flash('message','Your CRUD has been generated. See on the menu.');
+        Session::flash('message', 'Your CRUD has been generated. See on the menu.');
 
         return redirect('admin/crud-generator');
     }

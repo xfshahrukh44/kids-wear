@@ -48,8 +48,8 @@ class LoginController extends Controller
                            ->where('table_name','=','favicon')
                            ->first();
 
-        View()->share('logo',$logo);
-        View()->share('favicon',$favicon);
+        View()->share('logo', $logo);
+        View()->share('favicon', $favicon);
     }
 
     public function authenticated(Request $request, $user)

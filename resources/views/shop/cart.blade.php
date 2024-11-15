@@ -64,7 +64,6 @@
         .check-out-detail.card {
             color: black;
         }
-
     </style>
 @endsection
 @section('content')
@@ -129,13 +128,13 @@
 
                                                         <h6>{{ $value['name'] }}</h6>
 
-                                                        @if($value['color'])
-                                                            <small>Color: {{$value['color']}}</small>
+                                                        @if ($value['color'])
+                                                            <small>Color: {{ $value['color'] }}</small>
                                                             <br>
                                                         @endif
 
-                                                        @if($value['size'])
-                                                            <small>Size: {{$value['size']}}</small>
+                                                        @if ($value['size'])
+                                                            <small>Size: {{ $value['size'] }}</small>
                                                             <br>
                                                         @endif
 
@@ -150,15 +149,15 @@
                                             </td>
                                             <td class="text-center ">
                                                 <div class="qty center">
-{{--                                                    <span id={{ $count }} class="minus bg-dark cartcount"--}}
-{{--                                                        onclick="change(this.id,'-')">-</span>--}}
-{{--                                                    <input id="{{ 'counter ' . $count }}" type="number"--}}
-{{--                                                        class="count cartinput qtystyle" name="row[]"--}}
-{{--                                                        value="{{ $value['qty'] }}">--}}
-{{--                                                    <span id={{ $count }} class=" plus bg-dark cartcount"--}}
-{{--                                                        onclick="change(this.id,'+')">+</span>--}}
+                                                    {{--                                                    <span id={{ $count }} class="minus bg-dark cartcount" --}}
+                                                    {{--                                                        onclick="change(this.id,'-')">-</span> --}}
+                                                    {{--                                                    <input id="{{ 'counter ' . $count }}" type="number" --}}
+                                                    {{--                                                        class="count cartinput qtystyle" name="row[]" --}}
+                                                    {{--                                                        value="{{ $value['qty'] }}"> --}}
+                                                    {{--                                                    <span id={{ $count }} class=" plus bg-dark cartcount" --}}
+                                                    {{--                                                        onclick="change(this.id,'+')">+</span> --}}
 
-                                                    <h4>{{$value['qty']}}</h4>
+                                                    <h4>{{ $value['qty'] }}</h4>
                                                 </div>
                                             </td>
                                             <td>
@@ -189,7 +188,8 @@
                                         Continue Shopping</a>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{route('checkout')}}" class="updateCart btn btnDonate">Proceed to Checkout</a>
+                                    <a href="{{ route('checkout') }}" class="updateCart btn btnDonate">Proceed to
+                                        Checkout</a>
 
                                 </div>
                             </div>
